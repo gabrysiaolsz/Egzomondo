@@ -1,0 +1,419 @@
+:root {
+    --navbar-background: linear-gradient(to right, #ff1d58, #fcd200);
+    --background-color: #FEBAAD;
+    --container-color:  #dd674f;
+    --rect-color:       #fff;
+    --link-hover-color: #fcd200;
+    --font-color:       black;
+}
+
+* {
+    /* Global font settings */
+    font-family: sans-serif;
+    color: var(--font-color);
+    font-weight: bold;
+}
+
+a {
+    /* Disable decoration for all links */
+    text-decoration: none;
+}
+
+img {
+    /* Make images fill the entire container */
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    /* Background color */
+    background-color: var(--background-color);
+
+    /* Make body fill the whole screen */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+/* ---------------- Navbar ---------------------- */
+
+#navbar {
+    /* Navbar background */
+    background: var(--navbar-background);
+
+    /* Height of the navbar */
+    height: 45px;
+}
+
+#navbar > nav {
+    /* Size */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px 30px;
+
+    /* Positions of items */
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#navbar > nav > a > .logo {
+    /* Size of the logo */
+    font-size: 30px;
+    line-height: 35px;
+}
+
+#navbar > nav > a > .logo:hover{
+    color: #51565E;
+}
+
+#navbar > nav > ol {
+    /* Size */
+    line-height: 35px;
+    margin: 0;
+    padding: 0;
+
+    /* Make list a flexbox */
+    display: flex;
+
+    /* Disable list decoration */
+    list-style: none;
+}
+
+#navbar > nav > ol > li {
+    margin: 0;
+}
+
+#navbar > nav > ol > li > a {
+    /* Font settings */
+    font-size: 20px;
+    line-height: 35px;
+
+    /* Zero margins and space between options */
+    margin: 0 20px;
+    padding: 0;
+}
+
+#navbar > nav > ol > li > a:hover {
+    color: #51565E;
+}
+
+#navbar > nav > .search_box {
+    height: 35px;
+}
+
+#navbar > nav > .search_box > input {
+    /* Search bar colors */
+    background-color: #1e232b;
+    color: white;
+
+    /* Size */
+    font-size: 20px;
+    width: 300px;
+    height: 35px;
+    padding: 0 5px;
+
+    /* Border settings */
+    border: solid black 2px;
+    border-radius: 10px;
+}
+
+#navbar > nav > .search_box > a > span {
+    /* Search button colors */
+    background: #1e232b;
+    color: #fff;
+
+    /* Size */
+    box-sizing: border-box;
+    height: 100%;
+    padding: 8px;
+    font-size: 20px;
+
+    /* Round corners */
+    border-radius: 10px;
+}
+
+#navbar > nav > .search_box > a > span:hover {
+  background-color: #df1d58;
+}
+
+/* --------------- Everything below navbar --------------- */
+
+#below-navbar {
+    /* Fill the rest of the screen */
+    height: calc(100% - 45px);
+    width: 100%;
+
+    /* Center container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container {
+    /* Color of the container */
+    background-color: var(--container-color);
+    
+    /* Container size */
+    box-sizing: border-box;
+    height: 95%;
+    width: 90%;
+    padding: 10px;
+
+    /* Round corners */
+    border-radius: 20px;
+
+    /* Display content in a grid */
+    display: grid;
+    grid-template-rows: 120px 150px calc(100% - 270px);
+    grid-template-columns: 50% 50%;
+}
+
+/* ----------------- Profile picture and name --------------------- */
+
+#pfp-and-name {
+    /* Position in the grid */
+    grid-row: 1;
+    grid-column: 1;
+
+    /* Center profile picture and name vertically */
+    display: flex;
+    align-items: center;
+
+    /* Padding */
+    padding: 5px;
+}
+
+#pfp-container {
+    /* Profile picture size */
+    height: 105px;
+    width: 105px;
+    min-width: 105px;
+
+    /* Put profile picture in a circle */
+    border-radius: 50%;
+    border: solid black 3px;
+    overflow: hidden;
+
+    /* Some distance between profile picture and name */
+    margin-right: 20px;
+}
+
+#name-container {
+    font-size: 45px;
+}
+
+/* -------------- Area below profile picture -------------------- */
+
+#user-info {
+    /* Position in the grid */
+    grid-column: 1;
+    grid-row: 2;
+
+    /* Padding */
+    padding: 15px;
+}
+
+#user-info-box {
+    /* Color of the box */
+    background-color: var(--rect-color);
+
+    /* Fill the designated space */
+    width: 100%;
+    height: 100%;
+
+    /* Padding */
+    box-sizing: border-box;
+    padding: 10px;
+
+    /* Round corners */
+    border-radius: 15px;
+
+    /* Font size */
+    font-size: 18px;
+}
+
+/* Font settings for inputs and buttons */
+
+#user-info-box > input {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#user-info-box > button {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ------------------------ Stats -------------------------------- */
+
+#stats {
+    /* Position in the grid */
+    grid-column: 2;
+    grid-row: 1 / 3;
+
+    /* Padding */
+    padding: 15px;
+}
+
+#stats-flexbox {
+    /* Color of the box */
+    background-color: var(--rect-color);
+
+    /* Size of the box */
+    height: 100%;
+    width: 100%;
+
+    /* Flexbox properties */
+    display: flex;
+    flex-wrap: wrap;
+
+    /* Add vertical scroll when content doesn't fit */
+    overflow-y: auto;
+
+    /* Round corners */
+    border-radius: 25px;
+}
+
+.stats-box-elem {
+    /* Element size */
+    width: 250px;
+    height: 100px;
+    margin-right: 5px;
+    padding: 10px;
+
+    /* Center content vertically */
+    display: flex;
+    align-items: center;
+}
+
+.discipline-img {
+    height: 100px;
+    width: 100px;
+    margin-right: 25px;
+}
+
+.discipline-value {
+    font-weight: bold;
+    font-size: 35px;
+}
+
+/* ------------------------ Friends -------------------------- */
+
+#friends {
+    /* Add scroll if necessary */
+    overflow: auto;
+}
+
+#friends-flexbox {
+    /* Size */
+    width: auto;
+    height: auto;
+    padding: 15px;
+
+    /* Create a flexbox */
+    display: flex;
+    flex-direction: column;
+}
+
+.friends-box-elem {
+    /* Space between friends */
+    margin: 5px;
+
+    /* Full width */
+    width: auto;
+}
+
+.friends-box-elem-link {
+    /* Background color */
+    background: var(--rect-color);
+    
+    /* Shape of the link */
+    padding: 5px;
+    border-radius: 5px;
+    
+    /* Center content vertically */
+    display: flex;
+    align-items: center;
+}
+
+.friends-box-elem-link:hover {
+    /* Hover color */
+    background: linear-gradient(to right, orange, yellow);
+}
+
+.friends-pfp-container {
+    /* Size of the profile picture */
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+
+    /* Some distance between profile picture and name */
+    margin-right: 20px;
+
+    /* Make profile picture a circle */
+    overflow: hidden;
+    border-radius: 50%;
+    border: solid black 3px;
+}
+
+.friends-name-container {
+    font-size: 30px;
+}
+
+/* ----------------------- Challenges ------------------------ */
+
+#challenges {
+    /* Add scroll if necessary */
+    overflow: auto;
+}
+
+#challenges-flex {
+    /* Size */
+    width: auto;
+    height: auto;
+    padding: 15px;
+
+    /* Create a flexbox */
+    display: flex;
+    flex-direction: column;
+}
+
+.challenges-box-elem {
+    /* Background color */
+    background-color: var(--rect-color);
+
+    /* Round corners */
+    border-radius: 5px;
+
+    /* Size */
+    width: auto;
+    height: 96px;
+    margin: 5px;
+
+    position: relative;
+}
+
+.challenges-box-progress-bar {
+    border-radius: 5px;
+    background: linear-gradient(to right, orange, yellow);
+    width: 50%;
+    height: 100%;
+
+    position: absolute;
+}
+
+.challenges-box-name {
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    line-height: 96px;
+
+    /* Add three dots if the text overflows */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    position: absolute;
+}
