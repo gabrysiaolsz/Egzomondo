@@ -1,30 +1,35 @@
-CREATE TABLE Konto
-(
-    id    number primary key,
-    login VARCHAR2(20)  unique not null ,
-    haslo VARCHAR2(20) not null ,
-    plec NUMBER ,
-    waga NUMBER,
-    wzrost NUMBER,
-    zgoda_ranking NUMBER
 
+/*zmienia wszystko oprocz loginu i hasła*/
+UPDATE table Konto
+SET plec =  ,
+waga= ,
+wzrost= ,
+zgoda_ranking =
+WHERE login = '' AND haslo = '';
+/*end*/
 
 UPDATE table Konto
 SET haslo =  ''
-WHERE login = '';
+WHERE login = '' AND haslo = '';
 
 UPDATE table Konto
 SET plec =  /*num (0 lub 1)*/
-WHERE login = '';
+WHERE login = '' AND haslo = '';
 
 UPDATE table Konto
 SET  waga =
-WHERE login = '';
+WHERE login = '' AND haslo = '';
 
 UPDATE table Konto
 SET wzrost =
-WHERE login = '';
+WHERE login = '' AND haslo = '';
 
 UPDATE table Konto
 SET zgoda_ranking =  /*num (0 lub 1)*/
-WHERE login = '';
+WHERE login = '' AND haslo = '';
+
+
+/*znajomi - konwersja do dwukierunkowych*/
+SELECT * from ZNAJOMI
+UNION
+SELECT ZNAJOMY2,ZNAJOMY1 from ZNAJOMI;
