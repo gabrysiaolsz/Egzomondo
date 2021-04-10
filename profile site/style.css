@@ -42,7 +42,7 @@ body {
     background: var(--navbar-background);
 
     /* Height of the navbar */
-    height: 45px;
+    height: 60px;
 }
 
 #navbar > nav {
@@ -61,7 +61,7 @@ body {
 #navbar > nav > a > .logo {
     /* Size of the logo */
     font-size: 30px;
-    line-height: 35px;
+    line-height: 50px;
 }
 
 #navbar > nav > a > .logo:hover{
@@ -70,7 +70,7 @@ body {
 
 #navbar > nav > ol {
     /* Size */
-    line-height: 35px;
+    line-height: 50px;
     margin: 0;
     padding: 0;
 
@@ -88,7 +88,7 @@ body {
 #navbar > nav > ol > li > a {
     /* Font settings */
     font-size: 20px;
-    line-height: 35px;
+    line-height: 50px;
 
     /* Zero margins and space between options */
     margin: 0 20px;
