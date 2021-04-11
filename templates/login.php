@@ -1,18 +1,24 @@
 <?php
+    // Connects to SQLPLUS database.
     $user = 'wz418498';
     $password = 'IO2021';
     $db = '//labora.mimuw.edu.pl/LABS';
     $conn = oci_connect($user, $password, $db);
     session_start();
 
+    // Checks whether connection has been done.
     if (!$conn) {
         echo "oci_connect failed\n";
         $e = oci_error();
         echo $e['message'];
     }
+
+    // Checks whether already log on.
     if ($_SESSION['loggedin'] == TRUE) {
         header('location:'.$_SESSION['redirectURL']);
     }
+
+    // Checks whether the client tries to log in.
     if (isset($_POST['submit-log'])) {
         $q = "SELECT * FROM KONTO WHERE LOGIN = '$_POST[login]' AND HASLO = '$_POST[passwd]'";
         $query = oci_parse($conn, $q);
@@ -24,13 +30,12 @@
         } else {
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['login'] = $_POST['login'];
-            $_SESSION['password'] = $passwd;
-            if ($_POST['rememberpwd']) {
-                //TODO : Cookie
-            }
+            $_SESSION['password'] = $_POST['passwd'];
             header('location:'.$_SESSION['redirectURL']);
         }
     }
+
+    // Checks whether the client tries to register.
     if (isset($_POST['submit-reg'])) {  
         $q = "SELECT * FROM KONTO WHERE LOGIN = '$_POST[login]'";
         $query = oci_parse($conn, $q);
@@ -38,15 +43,16 @@
         oci_fetch($query);
 
         if (oci_num_rows($query) != 0) {
-            $error = "There is already a profile with that username";
-            echo "LOGINNOTMATCHING";
+            $error = "There is already a profile with that username.";
+            echo oci_num_rows($query);
         } else if (strcmp($_POST['passwd'], $_POST['chkpassword']) != 0) {
-            $error = "Passwords are not matching";
+            $error = "Passwords are not matching.";
         } else {
-            $i = "INSERT INTO KONTO VALUES (null, :lg, :pw, null, null, null, null)"; //TODO: Get insert to work
+            $login = "'".$_POST['login']."'";
+            $password = "'".$_POST['passwd']."'";
+
+            $i = "INSERT INTO KONTO VALUES (null, $login, $password, null, null, null, null)";
             $insert = oci_parse($conn, $i);
-            oci_bind_by_name($insert, ':lg', $_POST['login']);
-            oci_bind_by_name($insert, ':pw', $_POST['passwd']);
 
             $rc = oci_execute($insert);
             if (!$rc) {
@@ -54,7 +60,12 @@
                 var_dump($e);
             }
             oci_commit($conn);
-            echo "INSERTED"; 
+
+            $_SESSION['loggedin'] = TRUE;
+            $_SESSION['login'] = $_POST['login'];
+            $_SESSION['password'] = $password;
+            header('location:/frontend/templates/profile/index.html');
+            oci_free_statement($insert);
         }
     }
     oci_free_statement($query);
@@ -77,7 +88,7 @@
                 <button type="button" class="toggle-btn" onclick="register()">Register</button>
             </div>
             <?php 
-                    if ($error) { //TODO Maybe redo styling
+                    if ($error) {
                         echo "<p style=\"color:red; text-align:center\">".$error."</p>";
                     }
                 ?>

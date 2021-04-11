@@ -1,17 +1,4 @@
-:root {
-    --navbar-background: linear-gradient(to right, #ff1d58, #fcd200);
-    --background-color: #FEBAAD;
-    --container-color:  #dd674f;
-    --rect-color:       #fff;
-    --link-hover-color: #fcd200;
-    --font-color:       black;
-}
-
 * {
-    /* Global font settings */
-    font-family: sans-serif;
-    color: var(--font-color);
-    font-weight: bold;
     margin: 0;
     padding: 0;
 }
@@ -21,7 +8,7 @@ body {
 }
 
 .main-box{
-    height: 100%;
+    height: calc(100% - 55px);
     width: 100%;
     background-color: var(--background-color);
     background-position: center;
@@ -104,7 +91,7 @@ body {
 
 .span{
     color: #777;
-    font-size: 10px;
+    font-size: 5px;
     bottom: 68px;
     position: absolute;
 }
