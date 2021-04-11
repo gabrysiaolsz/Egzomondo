@@ -89,7 +89,7 @@ body {
     margin: 30px 10px 30px 0px;
 }
 
-.spanik1{
+.span-log{
     width: 150%;
     color: black;
     bottom: 31%;
@@ -97,7 +97,7 @@ body {
     position: absolute;
 }
 
-.spanik2{
+.span-reg{
     width: 150%;
     color: black;
     bottom: 26.5%;
