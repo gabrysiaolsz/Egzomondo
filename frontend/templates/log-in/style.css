@@ -27,7 +27,7 @@ body {
 }
 
 .button-box{
-    width: 220px;
+    width: 61%;
     margin: 35px auto;
     position: relative;
     box-shadow: 0 0 20px 9px #ff61241f;
@@ -89,10 +89,19 @@ body {
     margin: 30px 10px 30px 0px;
 }
 
-.span{
-    color: #777;
-    font-size: 5px;
-    bottom: 68px;
+.span-log{
+    width: 150%;
+    color: black;
+    bottom: 31%;
+    font-size: 15px;
+    position: absolute;
+}
+
+.span-reg{
+    width: 150%;
+    color: black;
+    bottom: 26.5%;
+    font-size: 12px;
     position: absolute;
 }
 
