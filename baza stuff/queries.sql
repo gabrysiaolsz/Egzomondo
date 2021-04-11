@@ -33,3 +33,18 @@ WHERE login = '' AND haslo = '';
 SELECT * from ZNAJOMI
 UNION
 SELECT ZNAJOMY2,ZNAJOMY1 from ZNAJOMI;
+
+SELECT K.LOGIN from KONTO K LEFt JOIN
+                  (
+                      SELECT *
+                      from KONTO
+                               LEFT JOIN
+                           (SELECT *
+                            from ZNAJOMI
+                            UNION
+                            SELECT ZNAJOMY2, ZNAJOMY1
+                            from ZNAJOMI) P
+                           ON KONTO.id = P.ZNAJOMY1
+                      WHERE KONTO.LOGIN = 'janusz'
+                  ) T
+ON K.ID = T.ZNAJOMY2 WHERE T.LOGIN is not null;
