@@ -1,18 +1,4 @@
-:root {
-    --navbar-background: linear-gradient(to right, #ff1d58, #fcd200);
-    --background-color: #FEBAAD;
-    --container-color:  #dd674f;
-    --rect-color:       #fff;
-    --link-hover-color: #fcd200;
-    --font-color:       black;
-}
-
-* {
-    /* Global font settings */
-    font-family: sans-serif;
-    color: var(--font-color);
-    font-weight: bold;
-}
+/* ----------------- Global settings ------------------- */
 
 a {
     /* Disable decoration for all links */
@@ -35,129 +21,11 @@ body {
     margin: 0;
 }
 
-/* ---------------- Navbar ---------------------- */
-
-#navbar {
-    /* Navbar background */
-    background: var(--navbar-background);
-
-    /* Height of the navbar */
-    height: 60px;
-}
-
-#navbar > nav {
-    /* Size */
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 5px 30px;
-
-    /* Positions of items */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#navbar > nav > a > .logo {
-    /* Size of the logo */
-    font-size: 30px;
-    line-height: 50px;
-}
-
-#navbar > nav > a > .logo:hover{
-    color: #51565E;
-}
-
-#navbar > nav > ol {
-    /* Size */
-    height: 100%;
-    line-height: 100%;
-    margin: 0;
-    padding: 0;
-
-    /* Make list a flexbox */
-    display: flex;
-
-    /* Disable list decoration */
-    list-style: none;
-}
-
-#navbar > nav > ol > li {
-    margin: 0;
-}
-
-#navbar > nav > ol > li > a {
-    /* Font settings */
-    font-size: 20px;
-    line-height: 50px;
-
-    /* Zero margins and space between options */
-    margin: 0 20px;
-    padding: 0;
-}
-
-#navbar > nav > ol > li > a:hover {
-    color: #51565E;
-}
-
-#navbar > nav > .search_box {
-    /* Size */
-    height: 40px;
-
-    /* Center vertically */
-    display: flex;
-    align-items: center;
-}
-
-#navbar > nav > .search_box > input {
-    /* Search bar colors */
-    background-color: #1e232b;
-    color: white;
-
-    /* Size */
-    box-sizing: border-box;
-    font-size: 20px;
-    width: 300px;
-    height: 100%;
-    padding: 0 5px;
-
-    /* Border settings */
-    border: solid black 2px;
-    border-radius: 10px;
-
-    /* Space between items */
-    margin-right: 2px;
-}
-
-#navbar > nav > .search_box > a > .fa-search {
-    /* Search button colors */
-    background: #1e232b;
-    color: #fff;
-
-    /* Size */
-    height: 20px;
-    width: 20px;
-    padding: 8px;
-    font-size: 20px;
-
-    /* Center the search symbol */
-    text-align: center;
-    line-height: 20px;
-
-    /* Border description */
-    border: solid black 2px;
-    border-radius: 10px;
-}
-
-#navbar > nav > .search_box > a > .fa-search:hover {
-    background-color: #df1d58;
-}
-
 /* --------------- Everything below navbar --------------- */
 
 #below-navbar {
     /* Fill the rest of the screen */
-    height: calc(100% - 60px);
+    height: calc(100% - 55px);
     width: 100%;
 
     /* Center container */
@@ -356,7 +224,7 @@ body {
 
 .friends-box-elem-link:hover {
     /* Hover color */
-    background: linear-gradient(to right, orange, yellow);
+    background: var(--selection-background);
 }
 
 .friends-pfp-container {
@@ -415,8 +283,10 @@ body {
 .challenges-box-progress-bar {
     /* Progress bar shape */
     border-radius: 5px;
-    background: linear-gradient(to right, orange, yellow);
     height: 100%;
+
+    /* Progress bar color */
+    background: var(--selection-background);
 
     /* For positioning the progress bar */
     position: absolute;
