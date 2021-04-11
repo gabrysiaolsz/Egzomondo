@@ -1,0 +1,16 @@
+:root {
+    --navbar-background:    linear-gradient(to right, #ff1d58, #fcd200);
+    --selection-background: linear-gradient(to right, orange, yellow);
+
+    --background-color:     #febaad;
+    --container-color:      #dd674f;
+    --rect-color:           white;
+    --font-color:           black;
+}
+
+* {
+    /* Global font settings */
+    font-family: sans-serif;
+    color: var(--font-color);
+    font-weight: bold;
+}

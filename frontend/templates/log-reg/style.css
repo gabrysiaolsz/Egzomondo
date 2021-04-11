@@ -1,17 +1,4 @@
-:root {
-    --navbar-background: linear-gradient(to right, #ff1d58, #fcd200);
-    --background-color: #FEBAAD;
-    --container-color:  #dd674f;
-    --rect-color:       #fff;
-    --link-hover-color: #fcd200;
-    --font-color:       black;
-}
-
 * {
-    /* Global font settings */
-    font-family: sans-serif;
-    color: var(--font-color);
-    font-weight: bold;
     margin: 0;
     padding: 0;
 }
