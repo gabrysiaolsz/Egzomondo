@@ -4,7 +4,7 @@
     $password = 'IO2021';
     $db = '//labora.mimuw.edu.pl/LABS';
     $conn = oci_connect($user, $password, $db);
-    $location = '/~tn418434/Egzomondo/frontend/templates/profile/';
+    $location = substr($_SERVER["REQUEST_URI"], 0, -16)."profile";
     session_start();
 
     // Checks whether connection has been done.
@@ -14,7 +14,7 @@
         echo $e['message'];
     }
 
-    // Checks whether already log on.
+    // Checks whether client is already log on.
     if ($_SESSION['loggedin'] == TRUE) {
         header('location:'.$_SESSION['redirectURL']);
     }
@@ -109,13 +109,13 @@
                         echo "<p style=\"color:red; text-align:center\">".$error."</p>";
                     }
                 ?>
-                <form action="soontodoindex.php" method="POST" id="login" class="input-group">
+                <form action="index.php" method="POST" id="login" class="input-group">
                     <input type="text" name="login" class="input-field" placeholder="User id" required>
                     <input type="password" name="passwd" class="input-field" placeholder="Enter password" required>
                     <input type="checkbox" name="rememberpwd" class="check-box"><span>Remember Password</span>
                     <button type="submit" name="submit-log" class="submit-btn">Log in</button>
                 </form>
-                <form action="soontodoindex.php" method="POST" id="register" class="input-group">
+                <form action="index.php" method="POST" id="register" class="input-group">
                     <input type="text" name="login" class="input-field" placeholder="User id" required>
                     <input type="password" name="passwd" class="input-field" placeholder="Enter password" required> 
                     <input type="password" name="chkpassword" class="input-field" placeholder="Confirm password" required>
