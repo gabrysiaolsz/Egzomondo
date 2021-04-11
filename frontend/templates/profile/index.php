@@ -1,6 +1,12 @@
 <html>
     <head>
-        <title>Egzomondo - Ullamcorper</title>
+        <title>
+            Egzomondo -
+            <?php
+                session_start();
+                echo $_SESSION['login'];
+            ?>
+        </title>
 
         <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
@@ -30,7 +36,12 @@
                     <div id="pfp-container">
                         <img src="../../style/img/default-pfp.png" />
                     </div>
-                    <div id="name-container">Ullamcorper</div>
+                    <div id="name-container">
+                        <?php
+			    session_start();
+                            echo $_SESSION['login'];
+                        ?>
+                    </div>
                 </div>
                 <div id="user-info">
                     <div id="user-info-box">
@@ -82,54 +93,53 @@
                 </div>
                 <div id="friends">
                     <div id="friends-flexbox">
-                        <div class="friends-box-elem">
-                            <a href="#">
-                                <div class="friends-box-elem-link">
-                                    <div class="friends-pfp-container">
-                                        <img src="../../style/img/default-pfp.png" />
+                        <?php
+			    session_start();
+                            $conn = oci_connect('wz418498','IO2021',"//labora.mimuw.edu.pl/LABS");
+                            if (!$conn) {
+                                echo "oci_connect failed\n";
+                                $e = oci_error();
+                                echo $e['message'];
+                            }
+
+                            $stid = oci_parse($conn,
+                                "
+                                SELECT K.LOGIN from KONTO K LEFt JOIN
+                                (
+                                    SELECT *
+                                    from KONTO
+                                            LEFT JOIN
+                                        (SELECT *
+                                            from ZNAJOMI
+                                            UNION
+                                            SELECT ZNAJOMY2, ZNAJOMY1
+                                            from ZNAJOMI) P
+                                        ON KONTO.id = P.ZNAJOMY1
+                                    WHERE KONTO.LOGIN = '".$_SESSION['login']."'
+                                ) T
+                                ON K.ID = T.ZNAJOMY2 WHERE T.LOGIN is not null
+                                ");
+                            oci_execute($stid);
+
+                            while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                echo '
+                                    <div class="friends-box-elem">
+                                        <a href="#">
+                                            <div class="friends-box-elem-link">
+                                                <div class="friends-pfp-container">
+                                                    <img src="../../style/img/default-pfp.png" />
+                                                </div>
+                                                <div class="friends-name-container">
+                                                    '.$row[0].'
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="friends-name-container">
-                                        Laoreet
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="friends-box-elem">
-                            <a href="#">
-                                <div class="friends-box-elem-link">
-                                    <div class="friends-pfp-container">
-                                        <img src="../../style/img/default-pfp.png" />
-                                    </div>
-                                    <div class="friends-name-container">
-                                        Hendrerit
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="friends-box-elem">
-                            <a href="#">
-                                <div class="friends-box-elem-link">
-                                    <div class="friends-pfp-container">
-                                        <img src="../../style/img/default-pfp.png" />
-                                    </div>
-                                    <div class="friends-name-container">
-                                        Venenatis
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="friends-box-elem">
-                            <a href="#">
-                                <div class="friends-box-elem-link">
-                                    <div class="friends-pfp-container">
-                                        <img src="../../style/img/default-pfp.png" />
-                                    </div>
-                                    <div class="friends-name-container">
-                                        Vestibulum
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                ';
+                                $i++;
+                            }
+                            oci_close($conn);
+                        ?>
                     </div>
                 </div>
                 <div id="challenges">
@@ -200,3 +210,4 @@
         </div>
     </body>
 </html>
+
