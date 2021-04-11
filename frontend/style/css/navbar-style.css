@@ -8,6 +8,10 @@
     height: 55px;
 }
 
+#navbar a {
+    text-decoration: none;
+}
+
 #navbar > nav {
     /* Size */
     width: 100%;
