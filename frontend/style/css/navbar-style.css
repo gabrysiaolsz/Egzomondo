@@ -5,7 +5,7 @@
     background: var(--navbar-background);
 
     /* Height of the navbar */
-    height: 60px;
+    height: 55px;
 }
 
 #navbar > nav {
@@ -23,6 +23,7 @@
 
 #navbar > nav > a > .logo {
     /* Size of the logo */
+    font-weight: bolder;
     font-size: 30px;
     line-height: 50px;
 }
@@ -51,6 +52,7 @@
 
 #navbar > nav > ol > li > a {
     /* Font settings */
+    font-weight: bolder;
     font-size: 20px;
     line-height: 50px;
 
