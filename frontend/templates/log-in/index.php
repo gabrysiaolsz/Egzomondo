@@ -102,7 +102,7 @@
                 <div class="button-box">
                     <div id="btn"></div>
                     <button type="button" class="toggle-btn" onclick="login()">Log in</button>
-                    <button type="button" class="toggle-btn" onclick="register()">Register</button>
+                    <button type="button" class="toggle-btn register-btn" onclick="register()">Register</button>
                 </div>
                 <?php 
                     if ($error) {
@@ -112,17 +112,18 @@
                 <form action="index.php" method="POST" id="login" class="input-group">
                     <input type="text" name="login" class="input-field" placeholder="User id" required>
                     <input type="password" name="passwd" class="input-field" placeholder="Enter password" required>
-                    <input type="checkbox" name="rememberpwd" class="check-box"><span>Remember Password</span>
+                    <input type="checkbox" name="rememberpwd" class="check-box"><span class="span-log">Remember Password</span>
                     <button type="submit" name="submit-log" class="submit-btn">Log in</button>
                 </form>
                 <form action="index.php" method="POST" id="register" class="input-group">
                     <input type="text" name="login" class="input-field" placeholder="User id" required>
                     <input type="password" name="passwd" class="input-field" placeholder="Enter password" required> 
                     <input type="password" name="chkpassword" class="input-field" placeholder="Confirm password" required>
-                    <input type="checkbox" class="check-box" required><span>I agree to the terms and conditions.</span>
+                    <input type="checkbox" class="check-box" required><span class="span-reg">I agree to the terms and conditions</span>
                     <button type="submit" name="submit-reg" class="submit-btn">Register</button>
                 </form>
             </div>
         </div>
     </body>
 </html>
+

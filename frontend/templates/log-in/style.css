@@ -27,7 +27,9 @@ body {
 }
 
 .button-box{
-    width: 61%;
+    box-sizing: border-box;
+    width: 220px;
+    height: 35px;
     margin: 35px auto;
     position: relative;
     box-shadow: 0 0 20px 9px #ff61241f;
@@ -35,19 +37,26 @@ body {
 }
 
 .toggle-btn{
+    box-sizing: border-box;
     padding: 10px 30px;
+    width: 50%;
     cursor: pointer;
     background: transparent;
     border: 0;
     outline: none;
-    position: relative;
+    position: absolute;
+    top: 0;
+}
+
+.register-btn {
+    left: 110px;
 }
 
 #btn{
     top: 0;
     left: 0;
     position: absolute;
-    width: 110px;
+    width: 50%;
     height: 100%;
     background: var(--navbar-background);
     border-radius: 30px;
@@ -113,9 +122,4 @@ body {
 #register{
     left: 450px;
 }
-
-
-
-
-
 
