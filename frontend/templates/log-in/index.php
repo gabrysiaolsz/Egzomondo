@@ -76,16 +76,23 @@
 <html>
     <head>
         <title> Login and registration</title>
-        <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css">
+        <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+        <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="script.js"></script>
         <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
     </head>
     <body>
-        <div id="navbar">
+    <div id="navbar">
             <nav>
-                <a href="#"><div class="logo">Egzomondo</div></a>
+                <a href="#">
+                    <div class="logo">
+                        <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
+                        <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
+                        <div id="logo-text">Egzomondo</div>
+                    </div>
+                </a>
                 <ol>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About us</a></li>

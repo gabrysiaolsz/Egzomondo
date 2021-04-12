@@ -17,7 +17,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 5px 30px;
+    padding: 5px 10px;
 
     /* Positions of items */
     display: flex;
@@ -26,13 +26,45 @@
 }
 
 #navbar > nav > a > .logo {
-    /* Size of the logo */
-    font-weight: bolder;
+    /* Size of the logo together with text */
     font-size: 30px;
-    line-height: 50px;
+    height: 50px;
+
+    /* Center items in the logo */
+    display: flex;
+    align-items: center;
+
+    /* For changing color of the logo img */
+    position: relative;
 }
 
-#navbar > nav > a > .logo:hover{
+#navbar > nav > a > .logo > #logo-text {
+    font-weight: bolder;
+}
+
+#navbar > nav > a > .logo > img {
+    /* Logo size */
+    width: 45px;
+    height: 45px;
+
+    /* Space between img and text in the logo */
+    margin-right: 5px;
+}
+
+#navbar > nav > a > .logo > #logo-icon-normal {
+    position: absolute;
+    z-index: 999;
+}
+
+#navbar > nav > a > .logo:hover > #logo-icon-normal {
+    opacity: 0;
+}
+
+#navbar > nav > a > .logo > #logo-icon-hover {
+    z-index: 998;
+}
+
+#navbar > nav > a > .logo:hover > #logo-text {
     color: #51565E;
 }
 

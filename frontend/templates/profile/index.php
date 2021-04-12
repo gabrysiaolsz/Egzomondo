@@ -12,6 +12,7 @@
         <title>
             Egzomondo - <?php echo $_SESSION['login']; ?>
         </title>
+        <link rel="shortcut icon" href="../../style/img/logo_icon.png">
 
         <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
@@ -24,7 +25,13 @@
         <!-- Navbar -->
         <div id="navbar">
             <nav>
-                <a href="#"><div class="logo">Egzomondo</div></a>
+                <a href="#">
+                    <div class="logo">
+                        <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
+                        <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
+                        <div id="logo-text">Egzomondo</div>
+                    </div>
+                </a>
                 <ol>
                     <li><a href="#">My profile</a></li>
                     <li><a href="#">Home</a></li>
