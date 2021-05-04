@@ -1,11 +1,14 @@
 <?php
     // Connects to SQLPLUS database.
+    $success = '';
+    $error = '';
     $user = 'wz418498';
     $password = 'IO2021';
     $db = '//labora.mimuw.edu.pl/LABS';
     $conn = oci_connect($user, $password, $db);
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -8)."log-in";
+    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -24)."log-in";
     session_start();
+    $target_dir = '../../uploads/profilepic/';
 
     // Checks whether connection has been done.
     if (!$conn) {
@@ -39,6 +42,8 @@
         if ($error) {
             
         } else {
+            $uploadOk = 1;
+
             if ($_POST['sex'] == 'female') {
                 $new_sex = 0;
             } else {
@@ -49,7 +54,68 @@
             } else {
                 $checked = 0;
             }
-            $q = "UPDATE KONTO SET LOGIN = '$_POST[username]', PLEC = $new_sex, WAGA = $_POST[weight], WZROST = $_POST[height], ZGODA_RANKING = $checked WHERE ID = '$id'";
+
+            if ($_FILES['fileToUpload']['size'] != 0) {
+                $target_file = $target_dir . $id . '.png';
+            
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+                // Check if image file is a actual image or fake image
+                if(isset($_POST["submit"])) {
+                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                    if($check !== false) {
+                        $error = "File is an image - " . $check["mime"] . ".";
+                        $uploadOk = 1;
+                    } else {
+                        $error = "File is not an image.";
+                        $uploadOk = 0;
+                    }
+                }
+
+                // Check if file already exists
+                if (file_exists($target_file)) {
+                    unlink($target_file);
+                }
+
+                // Check file size
+                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                    $error = "Sorry, your file is too large.";
+                    $uploadOk = 0;
+                }
+
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                    $error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $uploadOk = 0;
+                }
+
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    echo "Sorry, your file was not uploaded.";
+                    // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        // echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                    } else {
+                        $error = "Sorry, there was an error uploading your file.";
+                    }   
+                }
+            }
+            
+            
+            $q = "UPDATE KONTO SET ";
+            if ($_POST['username'] != '') {
+                $q += "LOGIN = '$_POST[username]', ";
+            }
+            $q += "PLEC = $new_sex, ";
+            if ($_POST['weight'] != '') {
+                $q += "WAGA = $_POST[weight], ";
+            }
+            if ($_POST['height'] != '') {
+                $q += "WZROST = $_POST[height], ";
+            }
+            $q += "ZGODA_RANKING = $checked WHERE ID = '$id'";
             $query = oci_parse($conn, $q);
             oci_execute($query);
 
@@ -57,7 +123,14 @@
             oci_execute($stid);
             $row = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
             [$id, $username, $password, $sex, $weight, $height, $rankingswitch] = $row;
-            $success = "Success!";
+            
+            
+            if ($error) {
+                
+            } else {
+                $success = "Success!";
+                header("location:index.php");
+            }
         }
     }
     
@@ -109,17 +182,24 @@
                     }
                 ?>
                 <b><h2 style="text-align: center;">Edit your profile <?php echo $username?></h2></b>
-                <div id="user" style="width:250px;left:75px;position: relative;">
-                    <form action="editprofile.php" method="POST" id="userinput" class="input-group" >
-
+                <div id="user" style="width:250px;left:50px;position: relative;">
+                    <form action="editprofile.php" enctype="multipart/form-data" method="POST" id="userinput" class="input-group" >
                         <table>
+                            <tr>
+                                <td><div id="pfp-and-name">
+                                        <div id="pfp-container">
+                                            <?php if (file_exists(''.$target_dir.''.$id.'.png')) { ?>
+                                                <img src="../../uploads/profilepic/<?php echo $id;?>.png" />
+                                            <?php } else { ?>
+                                                <img src="../../style/img/default-pfp.png" />
+                                            <?php } ?>
+                                        </div>
+                                    </div></td>
+                                <td>Change profile picture:<input type="file" value="Change your profile pic" name="fileToUpload"/></td>
+                            </tr>
                             <tr>
                                 <td>Username: </td>
                                 <td><input type="text" id="user" name="username" class="input-field" placeholder="User" value="<?php echo $username; ?>" /></td>
-                            </tr>
-                            <tr>
-                                <td>Password: </td>
-                                <td><input type="password" id="password" name="password" class="input-field" readonly value="<?php echo str_repeat('*', strlen($password)); ?>" /></td>
                             </tr>
                             <tr>
                                 <td>Weight: </td>
@@ -141,7 +221,7 @@
                             </tr>
                         </table>                                       
                         
-                        <button type="submit" name="usersubmit" class="submit-btn" style="top:150px">Submit changes</button>
+                        <button type="submit" name="usersubmit" class="submit-btn" style="width:300px">Submit changes</button>
                     </form>
                 </div>
             </div>

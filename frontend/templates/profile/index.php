@@ -1,10 +1,10 @@
 <?php
-    $uploaddir = '../../uploads/profilepic/';
     $user = 'wz418498';
     $password = 'IO2021';
     $db = '//labora.mimuw.edu.pl/LABS';
     $conn = oci_connect($user, $password, $db);
     $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -8)."log-in";
+    $upload_dir = '../../uploads/profilepic/';
 
     if (!$conn) {
         echo "oci_connect failed\n";
@@ -68,7 +68,7 @@
                 <!-- Profile picture and name -->
                 <div id="pfp-and-name">
                     <div id="pfp-container">
-                        <?php if (file_exists(''.$uploaddir.''.$id.'.png')) { ?>
+                        <?php if (file_exists(''.$upload_dir.''.$id.'.png')) { ?>
                             <img src="../../uploads/profilepic/<?php echo $id;?>.png" />
                         <?php } else { ?>
                             <img src="../../style/img/default-pfp.png" />

@@ -324,7 +324,7 @@ body {
 
 .forgotpwd-box{
     width: 400px;
-    height: 400px;
+    height: 500px;
     position: relative;
     margin: 6% auto;
     background: white;
@@ -333,7 +333,7 @@ body {
 }
 
 .input-field{
-    width: 75%;
+    width: 80%;
     padding: 10px 0;
     margin: 5px 0;
     border-left: 0;
