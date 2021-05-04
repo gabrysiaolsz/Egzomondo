@@ -41,7 +41,6 @@
     if (isset($_POST['passwdsubmit'])) {
         if (strcmp($_POST[newpwd], $_POST[newpwd2]) == 0) {
             $q = "UPDATE KONTO SET HASLO = '$_POST[newpwd]' WHERE LOGIN = '$_POST[login]'";
-            echo $q;
             $query = oci_parse($conn, $q);
             oci_execute($query);
             header('location:index.php');
