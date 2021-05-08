@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+
+<body>
+    
+    <!-- NAVBAR -->
+    <div id="navbar">
+        <nav>
+            <a href="#">
+                <div class="logo">
+                    <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
+                    <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
+                    <div id="logo-text">Egzomondo</div>
+                </div>
+            </a>
+            <ol>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Log in</a></li>
+            </ol>
+            <div class="search_box">
+                <input type="search" placeholder="Search">
+                <a href="#"><span class="fa fa-search"></span></a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Activity -->
+    <div class="w3-row-padding w3-center w3-margin-top">
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:460px">
+                <h3>Activity type</h3><br>
+                <i class="fa fa-heartbeat w3-margin-bottom" style="font-size:120px"></i>
+                <p>Choose the activity type from the list.</p>
+                <select name="activity" id="w3-container">
+                    <option value="running">Running</option>
+                    <option value="swimming">Swimming</option>
+                    <option value="cycling">Cycling</option>
+                    <option value="walking">Walking</option>
+                  </select>
+            </div>
+        </div>
+
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:460px">
+                <h3>Duration</h3><br>
+                <i class="fa fa-clock-o w3-margin-bottom" style="font-size:120px"></i>
+                <p>Enter duration of the activity in minutes.</p>
+                <p>You can choose from 5 up to 180 minutes:</p>
+                <input type="number" id="w3-container" min="5" max="180" required>
+            </div>
+        </div>
+
+        <div class="w3-third">
+            <div class="w3-card w3-container" style="min-height:460px">
+                <h3>Distance</h3><br>
+                <i class="fa fa-line-chart w3-margin-bottom" style="font-size:120px"></i>
+                <p>Enter travelled distance in kilometers.</p>
+                <p>You can choose from 1 up to 100 kilometers:</p>
+                <input type="number" id="w3-container" min="1" max="100" required>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
