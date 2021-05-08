@@ -23,7 +23,7 @@ body {
 }
 
 .w3-third {
-    width: 33.33333%
+    width: 30%;
 }
 
 .w3-row-padding, .w3-row-padding>.w3-third{
@@ -35,11 +35,19 @@ body {
 }
 
 .w3-card {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     position: relative;
     height: 460px;
 }
 
+.w3-card>select, .w3-card>input {
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    padding: 0;
+    padding-left: 2px;
+}
 
 .w3-center {
     background-color: var(--background-color);
@@ -56,4 +64,21 @@ body {
 
 .w3-padding {
     padding: 8px 16px !important;
+}
+
+/* Submit button  */
+.submit-btn{
+    font-size: large;
+    width: 20%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--navbar-background);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
 }
