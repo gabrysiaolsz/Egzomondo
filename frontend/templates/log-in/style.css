@@ -17,6 +17,7 @@ body {
 }
 
 .form-box{
+    box-shadow: var(--box-shadow-template);
     width: 380px;
     height: 480px;
     position: relative;
