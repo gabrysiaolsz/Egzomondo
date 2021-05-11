@@ -99,7 +99,7 @@ body {
 }
 
 a:hover > #author-name-field {
-    background: var(--selection-background);
+    background: pink;
 }
 
 /* --------------------------- Goal -------------------------- */
@@ -193,8 +193,6 @@ a:hover > #author-name-field {
     padding: 5px 0;
     width: 100%;
     height: 100px;
-
-    position: relative;
 }
 
 .users-box-elem-link {
@@ -206,42 +204,44 @@ a:hover > #author-name-field {
     height: 100%;
     width: 100%;
 
-    /* Centering vertically */
-    display: flex;
-    align-items: center;
+    overflow: hidden;
+    position: relative;
 }
 
-.users-box-elem > a:hover > .users-box-elem-progress-bar {
-    width: 100% !important;
+.users-box-elem-link:hover {
+    background: pink;
+}
+
+.users-box-elem-link:hover .users-box-elem-progress-bar {
+    background: red;
 }
 
 .users-box-elem-progress-bar {
     background: var(--selection-background);
-    border-radius: 10px;
-
     height: 100px;
-
     position: absolute;
-    z-index: 998;
 }
 
-.users-box-elem-link > .pfp-container {
+.users-box-elem-link .pfp-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    box-sizing: border-box;
     width: 80px;
     height: 80px;
-    margin-left: 5px;
-    margin-right: 25px;
 
     border-radius: 50%;
     border: 3px solid black;
     overflow: hidden;
-
-    z-index: 999;
 }
 
-.users-box-elem-link > .user-name-field {
+.users-box-elem-link .user-name-field {
+    position: absolute;
+    top: 0;
+    left: 125px;
+
     line-height: 100px;
     height: 100%;
-    z-index: 999;
-
     font-size: 40px;
 }
