@@ -43,6 +43,11 @@
             $q = "UPDATE KONTO SET HASLO = '$_POST[newpwd]' WHERE LOGIN = '$_POST[login]'";
             $query = oci_parse($conn, $q);
             oci_execute($query);
+            $r = oci_commit($conn);
+            if (!$r) {
+                $e = oci_error($conn);
+                trigger_error(htmlentities($e['message']), E_USER_ERROR);
+            }
             header('location:index.php');
         } else {
             $error = "Passwords are not matching";

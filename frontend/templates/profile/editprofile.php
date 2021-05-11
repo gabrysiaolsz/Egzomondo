@@ -106,18 +106,25 @@
             
             $q = "UPDATE KONTO SET ";
             if ($_POST['username'] != '') {
-                $q += "LOGIN = '$_POST[username]', ";
+                $q .= "LOGIN = '$_POST[username]', ";
             }
-            $q += "PLEC = $new_sex, ";
+            $q .= "PLEC = $new_sex, ";
             if ($_POST['weight'] != '') {
-                $q += "WAGA = $_POST[weight], ";
+                $q .= "WAGA = $_POST[weight], ";
             }
             if ($_POST['height'] != '') {
-                $q += "WZROST = $_POST[height], ";
+                $q .= "WZROST = $_POST[height], ";
             }
-            $q += "ZGODA_RANKING = $checked WHERE ID = '$id'";
+            $q .= "ZGODA_RANKING = $checked WHERE ID = '$id'";
             $query = oci_parse($conn, $q);
+            echo $q;
             oci_execute($query);
+
+            $r = oci_commit($conn);
+            if (!$r) {
+                $e = oci_error($conn);
+                trigger_error(htmlentities($e['message']), E_USER_ERROR);
+            }
 
             $stid = oci_parse($conn, "SELECT * FROM Konto WHERE login='".$_SESSION['login']."'");
             oci_execute($stid);
