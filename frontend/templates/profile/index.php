@@ -223,11 +223,11 @@
                                 "); 
                                 oci_execute($stid_loop);
                                 $row_loop = oci_fetch_array($stid_loop, OCI_BOTH + OCI_RETURN_NULLS);
-                                if($row_loop == false){
-                                    echo 'Unexpected error';
+                                if($row_loop != false){
+                                    $distance = $row_loop[0];
+                                    $time     = $row_loop[1];
                                 }
-                                $distance = $row_loop[0];
-                                $time     = $row_loop[1];
+                                
                                 if($unit == "km"){
                                     $progress = $distance/$goal*100;
                                 }else{
