@@ -217,16 +217,24 @@
                                 $goal           = $row[4];
                                 $unit           = $row[5];
                                 $act_type       = $row[6];
-                                $stid_loop = oci_parse($conn, "
+                                #echo "$start_time do $end_time<br>";
+                                
+                                $query = "
                                     SELECT sum(ilosc), sum(czas_trwania) FROM Aktywnosc
-                                    WHERE id = $id_uzytkownika AND id_rodzaju = $act_type
+                                    WHERE id = $id_uzytkownika AND id_rodzaju = $act_type AND '$start_time' <= data_rozpoczecia AND data_rozpoczecia <= '$end_time'
                                     GROUP BY id
-                                "); 
+                                ";
+
+                                #echo $query;
+                                $stid_loop = oci_parse($conn, $query); 
                                 oci_execute($stid_loop);
                                 $row_loop = oci_fetch_array($stid_loop, OCI_BOTH + OCI_RETURN_NULLS);
                                 if($row_loop != false){
                                     $distance = $row_loop[0];
                                     $time     = $row_loop[1];
+                                } else {
+                                    $distance = 0;
+                                    $time = 0;
                                 }
                                 
                                 if($unit == "km"){
@@ -234,6 +242,7 @@
                                 }else{
                                     $progress = $time/$goal*100;
                                 }
+                                #echo "progres:$progress% <br>";
                                 if($progress > 100) $progress = 100;
 
                                 echo '
