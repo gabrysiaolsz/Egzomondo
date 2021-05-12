@@ -54,6 +54,9 @@ CREATE TABLE UCZESTNICY_WYZWANIA
     wyzwanie number REFERENCES WYZWANIE,
     uczestnik number REFERENCES Konto
 );
+ALTER TABLE UCZESTNICY_WYZWANIA
+ADD CONSTRAINT unikalnosc_uczestnicy UNIQUE (wyzwanie,uczestnik);
+commit;
 
 CREATE TABLE Aktywnosc
 (
