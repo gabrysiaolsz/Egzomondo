@@ -1,6 +1,7 @@
 :root {
     --navbar-background:    linear-gradient(to right, #ff1d58, #fcd200);
     --selection-background: linear-gradient(to right, orange, yellow);
+    --box-shadow-template: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     --background-color:     #febaad;
     --container-color:      #dd674f;

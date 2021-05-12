@@ -18,6 +18,7 @@ body {
 }
 
 .w3-third {
+    box-shadow: var(--box-shadow-template);
     width: 100%;
     background-color: white;
 }
