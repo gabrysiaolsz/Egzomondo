@@ -176,10 +176,22 @@
                 <div id="challenges">
                     <div id="challenges-flex">
                         <?php
+                            $login = $_SESSION['login'];
+                            $stid = oci_parse($conn, 
+                                    "SELECT id FROM Konto WHERE login='$login'");
+                            oci_execute($stid);
+                            if(($row=oci_fetch_row($stid)) != false){
+                                $id_uzytkownika = $row[0];
+                                #echo "Your id is:$id_uzytkownika;";
+                            }else{
+                                $error = true;
+                                echo "You need to be signed in $login;\n";
+                            }
+                            #echo $_SESSION[id]." ".$id_uzytkownika;
                             $stid = oci_parse($conn, "
                                 SELECT W.id, W.nazwa, W.czas_rozpoczecia, W.czas_ukonczenia, W.cel, W.jednostka_celu, W.id_aktywnosci
                                 FROM UCZESTNICY_WYZWANIA UW
-                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $_SESSION[id]
+                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $id_uzytkownika
                                 INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID
                                 ORDER BY W.CZAS_UKONCZENIA DESC
                             ");
@@ -195,7 +207,7 @@
                                 $act_type       = $row[6];
                                 $stid_loop = oci_parse($conn, "
                                     SELECT sum(ilosc), sum(czas_trwania) FROM Aktywnosc
-                                    WHERE id = $_SESSION[id] AND id_rodzaju = $act_type
+                                    WHERE id = $id_uzytkownika AND id_rodzaju = $act_type
                                     GROUP BY id
                                 "); 
                                 oci_execute($stid_loop);
