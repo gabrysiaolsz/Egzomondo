@@ -32,6 +32,14 @@
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['login'] = $_POST['login'];
             $_SESSION['password'] = $_POST['passwd'];
+
+            $stid = oci_parse($conn,
+                "SELECT id FROM Konto WHERE login ='$_POST[login]'"
+            );
+            oci_execute($stid);
+            $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
+            $_SESSION['id'] = $row[0];
+
             header('location:'.$location);
         }
     }

@@ -25,7 +25,6 @@
     [$id, $weight, $height, $sex] = $row;
     
     oci_free_statement($stid);
-    oci_close($conn);
 ?>
 <html>
     <head>
@@ -83,8 +82,7 @@
                     <div id="user-info-box">
                         <div id="user-info-display">
 
-                        <?php
-
+                            <?php
                                 $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
                                 echo '<i class="fas fa-weight"></i>: '.$weight.' kg<br />';
                                 echo '<i class="fas fa-arrows-alt-v"></i>: '.$height.' cm<br />';
@@ -110,30 +108,25 @@
                 <!-- Stats -->
                 <div id="stats">
                     <div id="stats-flexbox">
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/swimming.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/cycling.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/running.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/ice-skating.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
+                        <?php
+                            $stid = oci_parse($conn, "
+                                SELECT T.ID, SUM(A.ILOSC) from TYP_AKTYWNOSCI T
+                                INNER JOIN AKTYWNOSC A on T.ID = A.ID_RODZAJU AND A.ID = ".$_SESSION['id'].
+                                " GROUP BY T.ID ORDER BY T.ID
+                            ");
+                            oci_execute($stid);
+
+                            while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                echo '
+                                    <div class="stats-box-elem">
+                                        <div class="discipline-img">
+                                            <img src="../../style/img/disciplines/'.$row[0].'.png" />
+                                        </div>
+                                        <div class="discipline-value">'.$row[1].' km</div>
+                                    </div>
+                                ';
+                            }
+                        ?>
                     </div>
                 </div>
                 <!-- Friends -->
@@ -180,66 +173,23 @@
                 <!-- Challenges -->
                 <div id="challenges">
                     <div id="challenges-flex">
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 75%;"></div>
-                            <div class="challenges-box-name">A Great Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 55%;"></div>
-                            <div class="challenges-box-name">Another Amazing Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 0%;"></div>
-                            <div class="challenges-box-name">Too Hard To Even Begin</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 100%;"></div>
-                            <div class="challenges-box-name">This One Was Actually Completed!</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 60%;"></div>
-                            <div class="challenges-box-name">Just A Casual Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
+                        <?php
+                            $stid = oci_parse($conn, '
+                                SELECT UW.WYZWANIE from UCZESTNICY_WYZWANIA UW
+                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = '.$_SESSION['id'].'
+                                INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID ORDER BY W.CZAS_UKONCZENIA DESC
+                            ');
+                            oci_execute($stid);
+
+                            while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                echo '
+                                    <div class="challenges-box-elem">
+                                        <div class="challenges-box-progress-bar" style="width: 70%;"></div>
+                                        <div class="challenges-box-name">A Great Challenge</div>
+                                    </div>
+                                ';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>        
