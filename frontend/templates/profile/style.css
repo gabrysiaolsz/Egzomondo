@@ -196,8 +196,6 @@ body {
 }
 
 #friends-flexbox {
-    box-shadow: var(--box-shadow-template);
-
     /* Size */
     width: auto;
     height: auto;

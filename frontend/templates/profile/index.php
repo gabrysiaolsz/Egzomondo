@@ -25,7 +25,6 @@
     [$id, $weight, $height, $sex] = $row;
     
     oci_free_statement($stid);
-    oci_close($conn);
 ?>
 <html>
     <head>
@@ -56,6 +55,8 @@
                     <li><a href="#">My profile</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About us</a></li>
+                    <li><a href="../new_challenge">New Challenge</a></li>
+                    <li><a href="../activity">New Activity</a></li>
                 </ol>
                 <div class="search_box">
                     <input type="search" placeholder="Search">
@@ -83,8 +84,7 @@
                     <div id="user-info-box">
                         <div id="user-info-display">
 
-                        <?php
-
+                            <?php
                                 $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
                                 echo '<i class="fas fa-weight"></i>: '.$weight.' kg<br />';
                                 echo '<i class="fas fa-arrows-alt-v"></i>: '.$height.' cm<br />';
@@ -110,30 +110,36 @@
                 <!-- Stats -->
                 <div id="stats">
                     <div id="stats-flexbox">
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/swimming.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/cycling.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/running.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
-                        <div class="stats-box-elem">
-                            <div class="discipline-img">
-                                <img src="../../style/img/disciplines/ice-skating.png" />
-                            </div>
-                            <div class="discipline-value">10km</div>
-                        </div>
+                        <?php
+                            $login = $_SESSION['login'];
+                            $stid = oci_parse($conn, 
+                                    "SELECT id FROM Konto WHERE login='$login'");
+                            oci_execute($stid);
+                            if(($row=oci_fetch_row($stid)) != false){
+                                $id_uzytkownika = $row[0];
+                                #echo "Your id is:$id_uzytkownika;";
+                            }else{
+                                $error = true;
+                                echo "You need to be signed in $login;\n";
+                            }
+                            $stid = oci_parse($conn, "
+                                SELECT T.ID, SUM(A.ILOSC) from TYP_AKTYWNOSCI T
+                                INNER JOIN AKTYWNOSC A on T.ID = A.ID_RODZAJU AND A.ID = ".$id_uzytkownika.
+                                " GROUP BY T.ID ORDER BY T.ID
+                            ");
+                            oci_execute($stid);
+
+                            while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                echo '
+                                    <div class="stats-box-elem">
+                                        <div class="discipline-img">
+                                            <img src="../../style/img/disciplines/'.$row[0].'.png" />
+                                        </div>
+                                        <div class="discipline-value">'.$row[1].' km</div>
+                                    </div>
+                                ';
+                            }
+                        ?>
                     </div>
                 </div>
                 <!-- Friends -->
@@ -180,66 +186,63 @@
                 <!-- Challenges -->
                 <div id="challenges">
                     <div id="challenges-flex">
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 75%;"></div>
-                            <div class="challenges-box-name">A Great Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 55%;"></div>
-                            <div class="challenges-box-name">Another Amazing Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 0%;"></div>
-                            <div class="challenges-box-name">Too Hard To Even Begin</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 100%;"></div>
-                            <div class="challenges-box-name">This One Was Actually Completed!</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 60%;"></div>
-                            <div class="challenges-box-name">Just A Casual Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
-                        <div class="challenges-box-elem">
-                            <div class="challenges-box-progress-bar" style="width: 15%;"></div>
-                            <div class="challenges-box-name">Another Test Challenge</div>
-                        </div>
+                        <?php
+                            $login = $_SESSION['login'];
+                            $stid = oci_parse($conn, 
+                                    "SELECT id FROM Konto WHERE login='$login'");
+                            oci_execute($stid);
+                            if(($row=oci_fetch_row($stid)) != false){
+                                $id_uzytkownika = $row[0];
+                                #echo "Your id is:$id_uzytkownika;";
+                            }else{
+                                $error = true;
+                                echo "You need to be signed in $login;\n";
+                            }
+                            #echo $_SESSION[id]." ".$id_uzytkownika;
+                            $stid = oci_parse($conn, "
+                                SELECT W.id, W.nazwa, W.czas_rozpoczecia, W.czas_ukonczenia, W.cel, W.jednostka_celu, W.id_aktywnosci
+                                FROM UCZESTNICY_WYZWANIA UW
+                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $id_uzytkownika
+                                INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID
+                                ORDER BY W.CZAS_UKONCZENIA DESC
+                            ");
+                            oci_execute($stid);
+
+                            while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                $challenge_id   = $row[0];
+                                $challenge_name = $row[1];
+                                $start_time     = $row[2];
+                                $end_time       = $row[3];
+                                $goal           = $row[4];
+                                $unit           = $row[5];
+                                $act_type       = $row[6];
+                                $stid_loop = oci_parse($conn, "
+                                    SELECT sum(ilosc), sum(czas_trwania) FROM Aktywnosc
+                                    WHERE id = $id_uzytkownika AND id_rodzaju = $act_type
+                                    GROUP BY id
+                                "); 
+                                oci_execute($stid_loop);
+                                $row_loop = oci_fetch_array($stid_loop, OCI_BOTH + OCI_RETURN_NULLS);
+                                if($row_loop != false){
+                                    $distance = $row_loop[0];
+                                    $time     = $row_loop[1];
+                                }
+                                
+                                if($unit == "km"){
+                                    $progress = $distance/$goal*100;
+                                }else{
+                                    $progress = $time/$goal*100;
+                                }
+                                if($progress > 100) $progress = 100;
+
+                                echo '
+                                    <div class="challenges-box-elem">
+                                        <div class="challenges-box-progress-bar" style="width: '.$progress.'%;"></div>
+                                        <div class="challenges-box-name">'.$row[1].'</div>
+                                    </div>
+                                ';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>        
