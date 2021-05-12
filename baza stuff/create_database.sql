@@ -44,6 +44,11 @@ CREATE TABLE Wyzwanie
     id_aktywnosci NUMBER REFERENCES Typ_aktywnosci
 );
 
+ALTER TABLE WYZWANIE
+ADD CONSTRAINT unikalnosc UNIQUE (nazwa,tworca,czas_rozpoczecia,czas_ukonczenia,id_aktywnosci,jednostka_celu,cel);
+commit;
+
+
 CREATE TABLE UCZESTNICY_WYZWANIA
 (
     wyzwanie number REFERENCES WYZWANIE,
