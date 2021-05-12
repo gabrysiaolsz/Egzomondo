@@ -35,6 +35,7 @@ body {
 }
 
 #container {
+    box-shadow: var(--box-shadow-template);
     /* Color of the container */
     background-color: var(--container-color);
     
@@ -70,6 +71,7 @@ body {
 }
 
 #pfp-container {
+    box-shadow: var(--box-shadow-template);
     /* Profile picture size */
     height: 80px;
     width: 80px;
@@ -100,6 +102,7 @@ body {
 }
 
 #user-info-box {
+    box-shadow: var(--box-shadow-template);
     /* Color of the box */
     background-color: var(--rect-color);
 
@@ -125,7 +128,7 @@ body {
     font-weight: bold;
 }
 
-#user-info-box > button {
+#user-info-box > button {    
     font-size: 18px;
     font-weight: bold;
 }
@@ -142,6 +145,8 @@ body {
 }
 
 #stats-flexbox {
+    box-shadow: var(--box-shadow-template);
+
     /* Color of the box */
     background-color: var(--rect-color);
 
@@ -191,6 +196,8 @@ body {
 }
 
 #friends-flexbox {
+    box-shadow: var(--box-shadow-template);
+
     /* Size */
     width: auto;
     height: auto;
@@ -202,6 +209,8 @@ body {
 }
 
 .friends-box-elem {
+    box-shadow: var(--box-shadow-template);
+
     /* Space between friends */
     margin: 5px;
 
@@ -228,6 +237,8 @@ body {
 }
 
 .friends-pfp-container {
+    box-shadow: var(--box-shadow-template);
+
     /* Size of the profile picture */
     width: 60px;
     height: 60px;
@@ -265,6 +276,8 @@ body {
 }
 
 .challenges-box-elem {
+    box-shadow: var(--box-shadow-template);
+
     /* Background color */
     background-color: var(--rect-color);
 
@@ -309,4 +322,49 @@ body {
 
     /* For positioning text */
     position: absolute;
+}
+
+/* --------------------------Edit profile----------------------*/
+
+.span-forgotpwd{
+    width: 150%;
+    color: purple;
+    left: 25%;
+    bottom: -20%;
+    font-size: 15px;
+    position: absolute;
+}
+
+.forgotpwd-box{
+    width: 400px;
+    height: 450px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.input-field{
+    width: 80%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: var(--navbar-background);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
 }

@@ -17,6 +17,7 @@ body {
 }
 
 .form-box{
+    box-shadow: var(--box-shadow-template);
     width: 380px;
     height: 480px;
     position: relative;
@@ -104,6 +105,25 @@ body {
     bottom: 31%;
     font-size: 15px;
     position: absolute;
+}
+
+.span-forgotpwd{
+    width: 150%;
+    color: purple;
+    left: 25%;
+    bottom: -20%;
+    font-size: 15px;
+    position: absolute;
+}
+
+.forgotpwd-box{
+    width: 380px;
+    height: 200px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    overflow: hidden;
 }
 
 .span-reg{
