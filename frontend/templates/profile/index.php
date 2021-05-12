@@ -55,6 +55,8 @@
                     <li><a href="#">My profile</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About us</a></li>
+                    <li><a href="../new_challenge">New Challenge</a></li>
+                    <li><a href="../activity">New Activity</a></li>
                 </ol>
                 <div class="search_box">
                     <input type="search" placeholder="Search">
@@ -175,7 +177,7 @@
                     <div id="challenges-flex">
                         <?php
                             $stid = oci_parse($conn, "
-                                SELECT W.id, W.nazwa, W.czas_rozpoczecia, W.czas_ukonczenia, W.cel, W.jednostka_celu
+                                SELECT W.id, W.nazwa, W.czas_rozpoczecia, W.czas_ukonczenia, W.cel, W.jednostka_celu, W.id_aktywnosci
                                 FROM UCZESTNICY_WYZWANIA UW
                                 INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $_SESSION[id]
                                 INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID
@@ -190,21 +192,29 @@
                                 $end_time       = $row[3];
                                 $goal           = $row[4];
                                 $unit           = $row[5];
-
+                                $act_type       = $row[6];
                                 $stid_loop = oci_parse($conn, "
-                                    SELECT sum(A.ilosc), sum(A.czas_trwania) FROM Aktywnosc A
-                                    WHERE A.id = $_SESSION[id]
-                                "); // Zapytanie do dokończenia
+                                    SELECT sum(ilosc), sum(czas_trwania) FROM Aktywnosc
+                                    WHERE id = $_SESSION[id] AND id_rodzaju = $act_type
+                                    GROUP BY id
+                                "); 
                                 oci_execute($stid_loop);
                                 $row_loop = oci_fetch_array($stid_loop, OCI_BOTH + OCI_RETURN_NULLS);
+                                if($row_loop == false){
+                                    echo 'Unexpected error';
+                                }
                                 $distance = $row_loop[0];
                                 $time     = $row_loop[1];
-
-                                echo $distance." ".$time;
+                                if($unit == "km"){
+                                    $progress = $distance/$goal*100;
+                                }else{
+                                    $progress = $time/$goal*100;
+                                }
+                                if($progress > 100) $progress = 100;
 
                                 echo '
                                     <div class="challenges-box-elem">
-                                        <div class="challenges-box-progress-bar" style="width: 12%;"></div>
+                                        <div class="challenges-box-progress-bar" style="width: '.$progress.'%;"></div>
                                         <div class="challenges-box-name">'.$row[1].'</div>
                                     </div>
                                 ';
