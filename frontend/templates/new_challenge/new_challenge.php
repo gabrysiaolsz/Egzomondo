@@ -41,6 +41,7 @@
                     $error = true;
                     echo "Challenge name cannot be empty\n";
                 }
+            $nazwa = filter_var($nazwa,FILTER_SANITIZE_EMAIL);
             $czas_rozpoczecia = $_REQUEST['start_time'];
             echo 
             $czas_rozpoczecia = date("Y-m-d", strtotime(str_replace('-', '/', $czas_rozpoczecia)));
