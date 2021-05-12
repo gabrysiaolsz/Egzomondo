@@ -111,9 +111,20 @@
                 <div id="stats">
                     <div id="stats-flexbox">
                         <?php
+                            $login = $_SESSION['login'];
+                            $stid = oci_parse($conn, 
+                                    "SELECT id FROM Konto WHERE login='$login'");
+                            oci_execute($stid);
+                            if(($row=oci_fetch_row($stid)) != false){
+                                $id_uzytkownika = $row[0];
+                                #echo "Your id is:$id_uzytkownika;";
+                            }else{
+                                $error = true;
+                                echo "You need to be signed in $login;\n";
+                            }
                             $stid = oci_parse($conn, "
                                 SELECT T.ID, SUM(A.ILOSC) from TYP_AKTYWNOSCI T
-                                INNER JOIN AKTYWNOSC A on T.ID = A.ID_RODZAJU AND A.ID = ".$_SESSION['id'].
+                                INNER JOIN AKTYWNOSC A on T.ID = A.ID_RODZAJU AND A.ID = ".$id_uzytkownika.
                                 " GROUP BY T.ID ORDER BY T.ID
                             ");
                             oci_execute($stid);
