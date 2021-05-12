@@ -1,0 +1,92 @@
+.w3-center * {
+    box-sizing: inherit;
+}
+
+.w3-center {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+.w3-center {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.w3-third {
+    box-shadow: var(--box-shadow-template);
+    width: 100%;
+    background-color: white;
+}
+
+.w3-third {
+    width: 30%;
+}
+
+.w3-row-padding, .w3-row-padding>.w3-third{
+    padding: 0 8px;
+}
+
+.w3-container {
+    padding: 0.01em 16px;
+}
+
+.w3-card {
+    position: relative;
+    height: 460px;
+}
+
+.w3-card>select, .w3-card>input, .w3-card>div {
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+}
+
+.w3-card select, .w3-card input {
+    padding: 0;
+    width: 120px;
+}
+
+.w3-card>div {
+    width: 100%;
+}
+
+.w3-center {
+    background-color: var(--background-color);
+    text-align: center !important;
+}
+
+.w3-margin-top {
+    margin-top: 3% !important;
+}
+
+.w3-margin-bottom {
+    margin-bottom: 16px !important;
+}
+
+.w3-padding {
+    padding: 8px 16px !important;
+}
+
+/* Submit button  */
+.submit-btn{
+    font-size: large;
+    width: 20%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--navbar-background);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
