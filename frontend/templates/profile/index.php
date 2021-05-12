@@ -82,11 +82,18 @@
                 <div id="user-info">
                     <div id="user-info-box">
                         <div id="user-info-display">
-                            <?php
-                                echo 'Weight: '.$weight.' kg<br />';
-                                echo 'Height: '.$height.' cm<br />';
-                                echo 'Sex: ';
+
+                        <?php
+                                $stid = oci_parse($conn, 
+                                    "SELECT waga, wzrost, plec FROM Konto WHERE login='".$_SESSION['login']."'");
+                                oci_execute($stid);
+
+                                $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
+                                echo '<i class="fas fa-weight"></i></i>: '.$row[0].' kg<br />';
+                                echo '<i class="fas fa-arrows-alt-v"></i>: '.$row[1].' cm<br />';
+                                echo '<i class="fas fa-venus-mars"></i>: ';
                                 if ($sex == 0) echo 'Female';
+                          
                                 else echo 'Male';
                                 echo '<br />';
                             ?>
