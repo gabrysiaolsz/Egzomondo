@@ -174,18 +174,38 @@
                 <div id="challenges">
                     <div id="challenges-flex">
                         <?php
-                            $stid = oci_parse($conn, '
-                                SELECT UW.WYZWANIE from UCZESTNICY_WYZWANIA UW
-                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = '.$_SESSION['id'].'
-                                INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID ORDER BY W.CZAS_UKONCZENIA DESC
-                            ');
+                            $stid = oci_parse($conn, "
+                                SELECT W.id, W.nazwa, W.czas_rozpoczecia, W.czas_ukonczenia, W.cel, W.jednostka_celu
+                                FROM UCZESTNICY_WYZWANIA UW
+                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $_SESSION[id]
+                                INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID
+                                ORDER BY W.CZAS_UKONCZENIA DESC
+                            ");
                             oci_execute($stid);
 
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                $challenge_id   = $row[0];
+                                $challenge_name = $row[1];
+                                $start_time     = $row[2];
+                                $end_time       = $row[3];
+                                $goal           = $row[4];
+                                $unit           = $row[5];
+
+                                $stid_loop = oci_parse($conn, "
+                                    SELECT sum(A.ilosc), sum(A.czas_trwania) FROM Aktywnosc A
+                                    WHERE A.id = $_SESSION[id]
+                                "); // Zapytanie do dokończenia
+                                oci_execute($stid_loop);
+                                $row_loop = oci_fetch_array($stid_loop, OCI_BOTH + OCI_RETURN_NULLS);
+                                $distance = $row_loop[0];
+                                $time     = $row_loop[1];
+
+                                echo $distance." ".$time;
+
                                 echo '
                                     <div class="challenges-box-elem">
-                                        <div class="challenges-box-progress-bar" style="width: 70%;"></div>
-                                        <div class="challenges-box-name">A Great Challenge</div>
+                                        <div class="challenges-box-progress-bar" style="width: 12%;"></div>
+                                        <div class="challenges-box-name">'.$row[1].'</div>
                                     </div>
                                 ';
                             }
