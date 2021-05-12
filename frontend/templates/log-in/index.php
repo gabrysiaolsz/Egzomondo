@@ -121,7 +121,9 @@
                     <input type="password" name="passwd" class="input-field" placeholder="Enter password" required>
                     <input type="checkbox" name="rememberpwd" class="check-box"><span class="span-log">Remember Password</span>
                     <button type="submit" name="submit-log" class="submit-btn">Log in</button>
+                    <a href="forgot_passwd.php" class="forgot-password"><span class="span-forgotpwd">Forgot password?</span></a>
                 </form>
+                
                 <form action="index.php" method="POST" id="register" class="input-group">
                     <input type="text" name="login" class="input-field" placeholder="User id" required>
                     <input type="password" name="passwd" class="input-field" placeholder="Enter password" required> 

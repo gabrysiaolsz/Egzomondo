@@ -1,11 +1,31 @@
 <?php
-    session_start();
-    $conn = oci_connect('wz418498','IO2021',"//labora.mimuw.edu.pl/LABS");
+    $user = 'wz418498';
+    $password = 'IO2021';
+    $db = '//labora.mimuw.edu.pl/LABS';
+    $conn = oci_connect($user, $password, $db);
+    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -8)."log-in";
+    $upload_dir = '../../uploads/profilepic/';
+
     if (!$conn) {
         echo "oci_connect failed\n";
         $e = oci_error();
         echo $e['message'];
     }
+
+    session_start();
+
+    # If you're not logged in, redirect to login page.
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
+        header('location:'.$redirect_to_login);
+    }
+    
+    $stid = oci_parse($conn, "SELECT id, waga, wzrost, plec FROM Konto WHERE login='".$_SESSION['login']."'");
+    oci_execute($stid);
+    $row = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
+    [$id, $weight, $height, $sex] = $row;
+    
+    oci_free_statement($stid);
+    oci_close($conn);
 ?>
 <html>
     <head>
@@ -48,7 +68,11 @@
                 <!-- Profile picture and name -->
                 <div id="pfp-and-name">
                     <div id="pfp-container">
-                        <img src="../../style/img/default-pfp.png" />
+                        <?php if (file_exists(''.$upload_dir.''.$id.'.png')) { ?>
+                            <img src="../../uploads/profilepic/<?php echo $id;?>.png" />
+                        <?php } else { ?>
+                            <img src="../../style/img/default-pfp.png" />
+                        <?php } ?>
                     </div>
                     <div id="name-container">
                         <?php echo $_SESSION['login']; ?>
@@ -58,6 +82,7 @@
                 <div id="user-info">
                     <div id="user-info-box">
                         <div id="user-info-display">
+
                         <?php
                                 $stid = oci_parse($conn, 
                                     "SELECT waga, wzrost, plec FROM Konto WHERE login='".$_SESSION['login']."'");
@@ -67,18 +92,19 @@
                                 echo '<i class="fas fa-weight"></i></i>: '.$row[0].' kg<br />';
                                 echo '<i class="fas fa-arrows-alt-v"></i>: '.$row[1].' cm<br />';
                                 echo '<i class="fas fa-venus-mars"></i>: ';
-                                if ($row[2] == 0) echo 'Female';
+                                if ($sex == 0) echo 'Female';
+                          
                                 else echo 'Male';
                                 echo '<br />';
                             ?>
-                            <button onclick="editBtn()">Edit</button>
+                            <button onclick="location.href='editprofile.php'">Edit</button>
                         </div>
                         <div id="user-info-edit" style="display: none;">
-                            <input type="number" placeholder="Weight (kg)" min="0" step="1" value="<?php echo $row[0]; ?>" /><br />
-                            <input type="number" placeholder="Height (cm)" min="0" step="1" value="<?php echo $row[1]; ?>" /><br />
-                            <input type="radio" id="male" name="sex" value="male" <?php if ($row[2] == 1) echo 'checked="checked"'; ?> />
+                            <input type="number" placeholder="Weight (kg)" min="0" step="1" value="<?php echo $weight; ?>" /><br />
+                            <input type="number" placeholder="Height (cm)" min="0" step="1" value="<?php echo $height; ?>" /><br />
+                            <input type="radio" id="male" name="sex" value="male" <?php if ($sex == 1) echo 'checked="checked"'; ?> />
                             <label for="male">Male</label>
-                            <input type="radio" id="female" name="sex" value="female" <?php if ($row[2] == 0) echo 'checked="checked"'; ?> />
+                            <input type="radio" id="female" name="sex" value="female" <?php if ($sex == 0) echo 'checked="checked"'; ?> />
                             <label for="female">Female</label><br />
                             <button type="submit">Save</button>
                             <button onclick="cancelBtn()">Cancel</button>

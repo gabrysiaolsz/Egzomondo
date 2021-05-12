@@ -44,6 +44,12 @@ CREATE TABLE Wyzwanie
     id_aktywnosci NUMBER REFERENCES Typ_aktywnosci
 );
 
+CREATE TABLE UCZESTNICY_WYZWANIA
+(
+    wyzwanie number REFERENCES WYZWANIE,
+    uczestnik number REFERENCES Konto
+);
+
 CREATE TABLE Aktywnosc
 (
     id number REFERENCES Konto,
