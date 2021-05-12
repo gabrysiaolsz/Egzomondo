@@ -56,7 +56,11 @@
             echo oci_num_rows($query);
         } else if (strcmp($_POST['passwd'], $_POST['chkpassword']) != 0) {
             $error = "Passwords are not matching.";
-        } else {
+        } else if (strcmp($_POST['login'], filter_var($_POST['login'],FILTER_SANITIZE_EMAIL)) != 0) {
+            $error = "Illegal characters in User id";
+        }else if (strcmp($_POST['passwd'], filter_var($_POST['passwd'],FILTER_SANITIZE_EMAIL)) != 0) {
+            $error = "Illegal characters in password";
+        }else {
             $login = "'".$_POST['login']."'";
             $password = "'".$_POST['passwd']."'";
 
