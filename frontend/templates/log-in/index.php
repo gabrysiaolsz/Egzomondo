@@ -106,9 +106,8 @@
                     </div>
                 </a>
                 <ol>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Log in</a></li>
+                    <li><a href="../home">Home</a></li>
+                    <li><a href="../about">About us</a></li>
                 </ol>
                 <div class="search_box">
                     <input type="search" placeholder="Search">

@@ -17,7 +17,6 @@
                     <li><a href="#">My profile</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About us</a></li>
-                    <li><a href='../new_challenge'>New Challenge</a></li>
                     <li><a href='../activity'>New Activity</a></li>
                 </ol>
                 <div class="search_box">
