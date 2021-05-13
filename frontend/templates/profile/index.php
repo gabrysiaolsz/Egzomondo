@@ -245,12 +245,12 @@
                                 #echo "progres:$progress% <br>";
                                 if($progress > 100) $progress = 100;
 
-                                echo '
-                                    <div class="challenges-box-elem">
-                                        <div class="challenges-box-progress-bar" style="width: '.$progress.'%;"></div>
-                                        <div class="challenges-box-name">'.$row[1].'</div>
+                                echo "
+                                    <div class='challenges-box-elem'>
+                                        <div class='challenges-box-progress-bar' style='width: $progress%;'></div>
+                                        <div class='challenges-box-name'><a href='../challenge/?id=$challenge_id'>$row[1]</a></div>
                                     </div>
-                                ';
+                                ";
                             }
                         ?>
                     </div>
