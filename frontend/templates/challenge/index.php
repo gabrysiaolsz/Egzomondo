@@ -138,6 +138,8 @@
                                     </div>
                                 ';
                             }
+
+                            oci_close($conn);
                         ?>
                     </div>
                 </div>

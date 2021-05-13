@@ -53,6 +53,8 @@
             $error = "Passwords are not matching";
         }
     }
+
+    oci_close($conn);
 ?>
 
 <html>

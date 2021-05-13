@@ -127,4 +127,3 @@
         ?>
     </body>
 </html>
-<?php oci_close($conn); ?>
