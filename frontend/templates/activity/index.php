@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+    session_start();
+    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -9)."log-in";
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
+        header('location:'.$redirect_to_login);
+    }
+?>
 <html>
     <head>
         <title>Add new activity</title>

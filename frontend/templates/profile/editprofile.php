@@ -6,7 +6,7 @@
     $password = 'IO2021';
     $db = '//labora.mimuw.edu.pl/LABS';
     $conn = oci_connect($user, $password, $db);
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -24)."log-in";
+    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -23)."log-in";
     session_start();
     $target_dir = '../../uploads/profilepic/';
 

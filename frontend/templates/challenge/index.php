@@ -7,6 +7,11 @@
         echo $e['message'];
     }
 
+    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -10)."log-in";
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
+        header('location:'.$redirect_to_login);
+    }
+
     $stid = oci_parse($conn, "alter SESSION set NLS_DATE_FORMAT = 'DD-MM-YYYY'");
     oci_execute($stid);
 
