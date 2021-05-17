@@ -19,18 +19,26 @@
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
         header('location:'.$redirect_to_login);
     }
-    
-    $stid = oci_parse($conn, "SELECT id, waga, wzrost, plec FROM Konto WHERE login='".$_SESSION['login']."'");
-    oci_execute($stid);
-    $row = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
-    [$id, $weight, $height, $sex] = $row;
-    
+
+    if (!isset($_GET['id'])) {
+        $login = $_SESSION['login'];
+        $stid = oci_parse($conn, "SELECT id, waga, wzrost, plec FROM Konto WHERE login='".$login."'");
+        oci_execute($stid);
+        [$id, $weight, $height, $sex] = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
+    }
+    else {
+        $id = $_GET['id'];
+        $stid = oci_parse($conn, "SELECT login, waga, wzrost, plec FROM Konto WHERE id='".$id."'");
+        oci_execute($stid);
+        [$login, $weight, $height, $sex] = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
+    }
+
     oci_free_statement($stid);
 ?>
 <html>
     <head>
         <title>
-            Egzomondo - <?php echo $_SESSION['login']; ?>
+            Egzomondo - <?php echo $login; ?>
         </title>
         <link rel="shortcut icon" href="../../style/img/logo_icon.png">
 
@@ -76,14 +84,13 @@
                         <?php } ?>
                     </div>
                     <div id="name-container">
-                        <?php echo $_SESSION['login']; ?>
+                        <?php echo $login; ?>
                     </div>
                 </div>
                 <!-- User info -->
                 <div id="user-info">
                     <div id="user-info-box">
                         <div id="user-info-display">
-
                             <?php
                                 $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
                                 echo '<i class="fas fa-weight"></i>: '.$weight.' kg<br />';
@@ -92,18 +99,9 @@
                                 if ($sex == 0) echo 'Female';
                                 else echo 'Male';
                                 echo '<br />';
+                                if ($_SESSION['login'] === $login)
+                                    echo '<button onclick="location.href=\'editprofile.php\'">Edit</button>';
                             ?>
-                            <button onclick="location.href='editprofile.php'">Edit</button>
-                        </div>
-                        <div id="user-info-edit" style="display: none;">
-                            <input type="number" placeholder="Weight (kg)" min="0" step="1" value="<?php echo $weight; ?>" /><br />
-                            <input type="number" placeholder="Height (cm)" min="0" step="1" value="<?php echo $height; ?>" /><br />
-                            <input type="radio" id="male" name="sex" value="male" <?php if ($sex == 1) echo 'checked="checked"'; ?> />
-                            <label for="male">Male</label>
-                            <input type="radio" id="female" name="sex" value="female" <?php if ($sex == 0) echo 'checked="checked"'; ?> />
-                            <label for="female">Female</label><br />
-                            <button type="submit">Save</button>
-                            <button onclick="cancelBtn()">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -111,20 +109,9 @@
                 <div id="stats">
                     <div id="stats-flexbox">
                         <?php
-                            $login = $_SESSION['login'];
-                            $stid = oci_parse($conn, 
-                                    "SELECT id FROM Konto WHERE login='$login'");
-                            oci_execute($stid);
-                            if(($row=oci_fetch_row($stid)) != false){
-                                $id_uzytkownika = $row[0];
-                                #echo "Your id is:$id_uzytkownika;";
-                            }else{
-                                $error = true;
-                                echo "You need to be signed in $login;\n";
-                            }
                             $stid = oci_parse($conn, "
                                 SELECT T.ID, SUM(A.ILOSC) from TYP_AKTYWNOSCI T
-                                INNER JOIN AKTYWNOSC A on T.ID = A.ID_RODZAJU AND A.ID = ".$id_uzytkownika.
+                                INNER JOIN AKTYWNOSC A on T.ID = A.ID_RODZAJU AND A.ID = ".$id.
                                 " GROUP BY T.ID ORDER BY T.ID
                             ");
                             oci_execute($stid);
@@ -147,7 +134,7 @@
                     <div id="friends-flexbox">
                         <?php
                             $stid = oci_parse($conn, "
-                                SELECT K.LOGIN from KONTO K LEFt JOIN
+                                SELECT K.ID, K.LOGIN from KONTO K LEFT JOIN
                                 (
                                     SELECT *
                                     from KONTO
@@ -158,22 +145,25 @@
                                             SELECT ZNAJOMY2, ZNAJOMY1
                                             from ZNAJOMI) P
                                         ON KONTO.id = P.ZNAJOMY1
-                                    WHERE KONTO.LOGIN = '".$_SESSION['login']."'
+                                    WHERE KONTO.LOGIN = '".$login."'
                                 ) T
-                                ON K.ID = T.ZNAJOMY2 WHERE T.LOGIN is not null
+                                ON K.ID = T.ZNAJOMY2 WHERE T.LOGIN IS NOT NULL
                             ");
                             oci_execute($stid);
 
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                $img_path = '../../style/img/default-pfp.png';
+                                if (file_exists(''.$upload_dir.''.$row[0].'.png'))
+                                    $img_path = '../../uploads/profilepic/'.$row[0].'.png';
                                 echo '
                                     <div class="friends-box-elem">
-                                        <a href="#">
+                                        <a href="../profile?id='.$row[0].'">
                                             <div class="friends-box-elem-link">
                                                 <div class="friends-pfp-container">
-                                                    <img src="../../style/img/default-pfp.png" />
+                                                    <img src="'.$img_path.'" />
                                                 </div>
                                                 <div class="friends-name-container">
-                                                    '.$row[0].'
+                                                    '.$row[1].'
                                                 </div>
                                             </div>
                                         </a>
@@ -187,44 +177,23 @@
                 <div id="challenges">
                     <div id="challenges-flex">
                         <?php
-                            $login = $_SESSION['login'];
-                            $stid = oci_parse($conn, 
-                                    "SELECT id FROM Konto WHERE login='$login'");
-                            oci_execute($stid);
-                            if(($row=oci_fetch_row($stid)) != false){
-                                $id_uzytkownika = $row[0];
-                                #echo "Your id is:$id_uzytkownika;";
-                            }else{
-                                $error = true;
-                                echo "You need to be signed in $login;\n";
-                            }
-                            #echo $_SESSION[id]." ".$id_uzytkownika;
                             $stid = oci_parse($conn, "
                                 SELECT W.id, W.nazwa, W.czas_rozpoczecia, W.czas_ukonczenia, W.cel, W.jednostka_celu, W.id_aktywnosci
                                 FROM UCZESTNICY_WYZWANIA UW
-                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $id_uzytkownika
+                                INNER JOIN KONTO K on K.ID = UW.UCZESTNIK AND K.ID = $id
                                 INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID
                                 ORDER BY W.CZAS_UKONCZENIA DESC
                             ");
                             oci_execute($stid);
 
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
-                                $challenge_id   = $row[0];
-                                $challenge_name = $row[1];
-                                $start_time     = $row[2];
-                                $end_time       = $row[3];
-                                $goal           = $row[4];
-                                $unit           = $row[5];
-                                $act_type       = $row[6];
-                                #echo "$start_time do $end_time<br>";
-                                
+                                [$challenge_id, $challenge_name, $start_time, $end_time, $goal, $unit, $act_type] = $row;
                                 $query = "
                                     SELECT sum(ilosc), sum(czas_trwania) FROM Aktywnosc
-                                    WHERE id = $id_uzytkownika AND id_rodzaju = $act_type AND '$start_time' <= data_rozpoczecia AND data_rozpoczecia <= '$end_time'
+                                    WHERE id = $id AND id_rodzaju = $act_type AND '$start_time' <= data_rozpoczecia AND data_rozpoczecia <= '$end_time'
                                     GROUP BY id
                                 ";
 
-                                #echo $query;
                                 $stid_loop = oci_parse($conn, $query); 
                                 oci_execute($stid_loop);
                                 $row_loop = oci_fetch_array($stid_loop, OCI_BOTH + OCI_RETURN_NULLS);
@@ -244,12 +213,19 @@
                                 #echo "progres:$progress% <br>";
                                 if($progress > 100) $progress = 100;
 
-                                echo "
-                                    <div class='challenges-box-elem'>
-                                        <div class='challenges-box-progress-bar' style='width: $progress%;'></div>
-                                        <div class='challenges-box-name'><a href='../challenge/?id=$challenge_id'>$row[1]</a></div>
+                                echo '
+                                    <div class="challenges-box-elem">
+                                        <a href="../challenge/?id='.$challenge_id.'">
+                                            <div class="challenges-box-elem-link">
+                                                <div style="width: '.$progress.'%" class="challenges-box-progress-bar">
+                                                    <div class="challenges-box-name">
+                                                        '.$challenge_name.'
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                ";
+                                ';
                             }
                         ?>
                     </div>
