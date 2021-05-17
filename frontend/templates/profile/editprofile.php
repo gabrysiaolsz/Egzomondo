@@ -136,6 +136,7 @@
                 
             } else {
                 $success = "Success!";
+                $_SESSION['login'] = $_POST['username'];
                 header("location:index.php");
             }
         }
@@ -156,28 +157,7 @@
         <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
     </head>
     <body>
-    <div id="navbar">
-            <nav>
-                <a href="../home">
-                    <div class="logo">
-                        <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
-                        <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
-                        <div id="logo-text">Egzomondo</div>
-                    </div>
-                </a>
-                <ol>
-                    <li><a href="<?php echo substr($_SERVER["REQUEST_URI"], 0, -16);?>">My profile</a></li>
-                    <li><a href="../home">Home</a></li>
-                    <li><a href="../about">About us</a></li>
-                    <li><a href="../new_challenge">New Challenge</a></li>
-                    <li><a href="../activity">New Activity</a></li>
-                </ol>
-                <div class="search_box">
-                    <input type="search" placeholder="Search">
-                    <a href="#"><span class="fa fa-search"></span></a>
-                </div>
-            </nav>
-        </div>
+        <?php include '../_common/navbar.php'; ?>
         <div class="main-box">
             <div class="forgotpwd-box">
                 <?php 
