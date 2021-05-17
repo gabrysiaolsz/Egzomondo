@@ -79,15 +79,15 @@
                 $query = "SELECT id FROM Typ_aktywnosci WHERE nazwa = '$id_aktywnosci'";
                 $pars = oci_parse($conn, $query);
                 oci_execute($pars);
-                if(($row=oci_fetch_row($pars)) != false){
+                if (($row=oci_fetch_row($pars)) != false) {
                     $id_aktywnosci = $row[0];
-                }else{
+                } else if ($id_aktywnosci === "wszystkie") {
+                    $id_aktywnosci = null;
+                } else {
                     $error = true;
                     echo "No such activity as $id_aktywnosci\n";
                 }
                 oci_free_statement($pars);
-
-
             if(!$error)
             {
                 $query = "INSERT INTO WYZWANIE VALUES (null, '$nazwa', $id_uzytkownika, TO_DATE('$czas_rozpoczecia', 'YYYY-MM-DD'), TO_DATE('$czas_ukonczenia', 'YYYY-MM-DD'), 0, $cel, '$jednostka_celu', 0, $id_aktywnosci)";
