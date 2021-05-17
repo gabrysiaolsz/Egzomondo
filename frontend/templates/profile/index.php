@@ -45,7 +45,7 @@
         <!-- Navbar -->
         <div id="navbar">
             <nav>
-                <a href="#">
+                <a href="../home">
                     <div class="logo">
                         <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
                         <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">

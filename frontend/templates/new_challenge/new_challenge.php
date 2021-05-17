@@ -6,7 +6,7 @@
         <!-- Navbar -->
         <div id="navbar">
             <nav>
-                <a href="#">
+                <a href="../home">
                     <div class="logo">
                         <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
                         <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
@@ -14,9 +14,9 @@
                     </div>
                 </a>
                 <ol>
-                    <li><a href="#">My profile</a></li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a href="../profile">My profile</a></li>
+                    <li><a href="../home">Home</a></li>
+                    <li><a href="../about">About us</a></li>
                     <li><a href='../activity'>New Activity</a></li>
                 </ol>
                 <div class="search_box">
