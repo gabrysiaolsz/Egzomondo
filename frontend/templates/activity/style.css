@@ -2,16 +2,13 @@
     box-sizing: inherit;
 }
 
-.w3-center {
-    box-sizing: border-box;
-}
-
 body {
     background-color: var(--background-color);
     margin: 0;
 }
 
 .w3-center {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -19,11 +16,7 @@ body {
 
 .w3-third {
     box-shadow: var(--box-shadow-template);
-    width: 100%;
     background-color: white;
-}
-
-.w3-third {
     width: 30%;
 }
 
@@ -61,10 +54,6 @@ body {
 
 .w3-margin-bottom {
     margin-bottom: 16px !important;
-}
-
-.w3-padding {
-    padding: 8px 16px !important;
 }
 
 /* Submit button  */

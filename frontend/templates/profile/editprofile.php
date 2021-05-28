@@ -1,26 +1,7 @@
 <?php
-    // Connects to SQLPLUS database.
-    $success = '';
-    $error = '';
-    $user = 'wz418498';
-    $password = 'IO2021';
-    $db = '//labora.mimuw.edu.pl/LABS';
-    $conn = oci_connect($user, $password, $db);
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -23)."log-in";
-    session_start();
+    include '../_common/redirect_to_login.php';
+    include '../_common/connect_to_db.php';
     $target_dir = '../../uploads/profilepic/';
-
-    // Checks whether connection has been done.
-    if (!$conn) {
-        echo "oci_connect failed\n";
-        $e = oci_error();
-        echo $e['message'];
-    }
-
-    # If you're not logged in, redirect to login page.
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
-        header('location:'.$redirect_to_login);
-    }
 
     $stid = oci_parse($conn, "SELECT * FROM Konto WHERE login='".$_SESSION['login']."'");
     oci_execute($stid);
@@ -56,7 +37,7 @@
             }
 
             if ($_FILES['fileToUpload']['size'] != 0) {
-                $target_file = $target_dir . $id . '.png';
+                $target_file = $target_dir.$id.'.png';
             
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
@@ -145,7 +126,6 @@
     oci_free_statement($stid);
     oci_close($conn);
 ?>
-
 <html>
     <head>
         <title> Login and registration</title>
@@ -217,4 +197,3 @@
         </div>
     </body>
 </html>
-
