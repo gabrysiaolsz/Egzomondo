@@ -1,20 +1,17 @@
 <?php
-    session_start();
-    $conn = oci_connect('wz418498','IO2021',"//labora.mimuw.edu.pl/LABS");
-    if (!$conn) {
-        echo "oci_connect failed\n";
-        $e = oci_error();
-        echo $e['message'];
-    }
+    include '../_common/redirect_to_login.php';
+    include '../_common/connect_to_db.php';
 
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -10)."log-in";
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
-        header('location:'.$redirect_to_login);
-    }
-
+    // Display date differently
     $stid = oci_parse($conn, "alter SESSION set NLS_DATE_FORMAT = 'DD-MM-YYYY'");
     oci_execute($stid);
 
+    $error = false;
+    if (!isset($_GET['id'])) {
+        $error = true;
+        echo "No id provided!\n";
+        return;
+    }
     $id = $_GET['id'];
     $stid = oci_parse($conn,
         "SELECT w.nazwa, k.id, k.login, w.cel, w.jednostka_celu, w.id_aktywnosci, w.czas_rozpoczecia, w.czas_ukonczenia
@@ -22,15 +19,9 @@
         WHERE w.tworca=k.id AND w.id=".$id);
     oci_execute($stid);
     $row = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
-    
-    $challenge_name      = $row[0];
-    $challenge_author_id = $row[1];
-    $challenge_author    = $row[2];
-    $challenge_goal      = $row[3];
-    $challenge_unit      = $row[4];
-    $activity_id         = $row[5];
-    $start_date          = $row[6];
-    $end_date            = $row[7];
+    [$challenge_name, $challenge_author_id, $challenge_author, 
+        $challenge_goal, $challenge_unit, $activity_id, 
+        $start_date, $end_date] = $row;
 ?>
 <html>
     <head>

@@ -1,25 +1,9 @@
 <?php
-    $user = 'wz418498';
-    $password = 'IO2021';
-    $db = '//labora.mimuw.edu.pl/LABS';
-    $conn = oci_connect($user, $password, $db);
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -8)."log-in";
-    $redirect_to_new_challenge = substr($_SERVER["REQUEST_URI"], 0, -8)."new_challenge";
+    include '../_common/redirect_to_login.php';
+    include '../_common/connect_to_db.php';
     $upload_dir = '../../uploads/profilepic/';
 
-    if (!$conn) {
-        echo "oci_connect failed\n";
-        $e = oci_error();
-        echo $e['message'];
-    }
-
-    session_start();
-
-    # If you're not logged in, redirect to login page.
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
-        header('location:'.$redirect_to_login);
-    }
-
+    // Preparing information about the user
     if (!isset($_GET['id'])) {
         $login = $_SESSION['login'];
         $stid = oci_parse($conn, "SELECT id, waga, wzrost, plec FROM Konto WHERE login='".$login."'");
@@ -32,21 +16,15 @@
         oci_execute($stid);
         [$login, $weight, $height, $sex] = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
     }
-
     oci_free_statement($stid);
 ?>
 <html>
     <head>
-        <title>
-            Egzomondo - <?php echo $login; ?>
-        </title>
+        <title> Egzomondo - <?php echo $login; ?> </title>
         <link rel="shortcut icon" href="../../style/img/logo_icon.png">
-
         <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
-
-        <script src="buttons.js"></script>
         <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
     </head>
     <body>
@@ -56,8 +34,8 @@
                 <!-- Profile picture and name -->
                 <div id="pfp-and-name">
                     <div id="pfp-container">
-                        <?php if (file_exists(''.$upload_dir.''.$id.'.png')) { ?>
-                            <img src="../../uploads/profilepic/<?php echo $id;?>.png" />
+                        <?php if (file_exists($upload_dir.$id.'.png')) { ?>
+                            <img src="<?php echo $upload_dir.$id; ?>.png" />
                         <?php } else { ?>
                             <img src="../../style/img/default-pfp.png" />
                         <?php } ?>
@@ -69,7 +47,7 @@
                 <!-- User info -->
                 <div id="user-info">
                     <div id="user-info-box">
-                        <div id="user-info-display">
+                        <div>
                             <?php
                                 $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
                                 echo '<i class="fas fa-weight"></i>: '.$weight.' kg<br />';
@@ -132,8 +110,8 @@
 
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
                                 $img_path = '../../style/img/default-pfp.png';
-                                if (file_exists(''.$upload_dir.''.$row[0].'.png'))
-                                    $img_path = '../../uploads/profilepic/'.$row[0].'.png';
+                                if (file_exists($upload_dir.$row[0].'.png'))
+                                    $img_path = $upload_dir.$row[0].'.png';
                                 echo '
                                     <div class="friends-box-elem">
                                         <a href="../profile?id='.$row[0].'">
@@ -184,13 +162,12 @@
                                     $time = 0;
                                 }
                                 
-                                if($unit == "km"){
-                                    $progress = $distance/$goal*100;
-                                }else{
-                                    $progress = $time/$goal*100;
+                                if ($unit == "km") {
+                                    $progress = $distance / $goal * 100;
+                                } else {
+                                    $progress = $time / $goal * 100;
                                 }
-                                #echo "progres:$progress% <br>";
-                                if($progress > 100) $progress = 100;
+                                if ($progress > 100) $progress = 100;
 
                                 echo '
                                     <div class="challenges-box-elem">
