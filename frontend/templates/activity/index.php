@@ -1,10 +1,4 @@
-<?php
-    session_start();
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -9)."log-in";
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
-        header('location:'.$redirect_to_login);
-    }
-?>
+<?php include '../_common/redirect_to_login.php'; ?>
 <html>
     <head>
         <title>Add new activity</title>
@@ -28,6 +22,7 @@
                             <option value="bieg">Running</option>
                             <option value="plywanie">Swimming</option>
                             <option value="rower">Cycling</option>
+                            <option value="dowolna">All</option>
                         </select>
                     </div>
                 </div>
@@ -38,7 +33,7 @@
                         <i class="fa fa-clock-o w3-margin-bottom" style="font-size:120px"></i>
                         <p>Enter duration of the activity in minutes.</p>
                         <p>You can choose from 5 up to 180 minutes:</p>
-                        <input type="number" name="duration" placeholder="30" class="w3-container" min="5" max="180" required> 
+                        <input type="number" name="duration" value="30" class="w3-container" min="5" max="180" required>
                     </div>
                 </div>
 
@@ -48,7 +43,7 @@
                         <i class="fa fa-line-chart w3-margin-bottom" style="font-size:120px"></i>
                         <p>Enter travelled distance in kilometers.</p>
                         <p>You can choose from 1 up to 100 kilometers:</p>
-                        <input type="number" name="distance" placeholder="5" class="w3-container" min="1" max="100" required>   
+                        <input type="number" name="distance" value="5" class="w3-container" min="1" max="100" required>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,4 @@
-<?php
-    session_start();
-    $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -14)."log-in";
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
-        header('location:'.$redirect_to_login);
-    }
-?>
+<?php include '../_common/redirect_to_login.php'; ?>
 <html>
     <head>
         <title>Add new challenge</title>
