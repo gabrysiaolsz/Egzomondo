@@ -5,6 +5,7 @@
 
     // Preparing information about the user
     if (!isset($_GET['id'])) {
+        $not_my_acc = "False";
         $login = $_SESSION['login'];
         $stid = oci_parse($conn, "SELECT id, waga, wzrost, plec FROM Konto WHERE login='".$login."'");
         oci_execute($stid);
@@ -15,6 +16,26 @@
         $stid = oci_parse($conn, "SELECT login, waga, wzrost, plec FROM Konto WHERE id='".$id."'");
         oci_execute($stid);
         [$login, $weight, $height, $sex] = oci_fetch_array($stid, OCI_BOTH + OCI_RETURN_NULLS);
+
+        if (strcmp($login, $_SESSION['login']) == 0) {
+            $not_my_acc = "False";
+        } else {
+            $not_my_acc = "True";
+            # Check if is my friend.
+
+            $q = "SELECT * FROM ZNAJOMI WHERE ZNAJOMY1 = (SELECT id FROM KONTO WHERE login = '$_SESSION[login]') AND ZNAJOMY2 = $_GET[id]";
+            $query = oci_parse($conn, $q);
+            oci_execute($query);
+            oci_fetch($query);
+
+            if (oci_num_rows($query) < 1) {
+                // S/he's not.
+                $not_my_acc = "No";
+            } else {
+                // S/he is.
+                $not_my_acc = "Yes";
+            }
+        }
     }
     oci_free_statement($stid);
 ?>
@@ -43,6 +64,15 @@
                     <div id="name-container">
                         <?php echo $login; ?>
                     </div>
+                    <?php if (strcmp($not_my_acc, "False") != 0) {?>
+                    <div id="add_remove_friend">
+                        <?php if (strcmp($not_my_acc, "Yes") == 0) { ?>
+                            <a href="./remove_friend.php?id=<?php echo $id;?>"><i class="fas fa-minus-circle"></i></a>
+                        <?php } else { ?>
+                            <a href="./add_friend.php?id=<?php echo $id;?>"><i class="fas fa-plus-circle"></i></a>
+                        <?php } ?>
+                    </div>
+                    <?php } ?>
                 </div>
                 <!-- User info -->
                 <div id="user-info">
