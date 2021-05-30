@@ -97,7 +97,7 @@
                                     GROUP BY A.ID
                                 ");
                                 $err = oci_execute($stid2);
-                                $exists = ($row2 = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS))
+                                $exists = ($row2 = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS));
                                 if ($challenge_unit == 'km' && $exists) 
                                     $progress = $row2[0] / $challenge_goal * 100;
                                 else if ($exists) 
