@@ -1,0 +1,368 @@
+/* ----------------- Global settings ------------------- */
+
+a {
+    /* Disable decoration for all links */
+    text-decoration: none;
+}
+
+img {
+    /* Make images fill the entire container */
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    /* Background color */
+    background-color: var(--background-color);
+
+    /* Make body fill the whole screen */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+/* --------------- Everything below navbar --------------- */
+
+#below-navbar {
+    /* Fill the rest of the screen */
+    height: calc(100% - 55px);
+    width: 100%;
+
+    /* Center container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container {
+    box-shadow: var(--box-shadow-template);
+    /* Color of the container */
+    background-color: var(--container-color);
+    
+    /* Container size */
+    box-sizing: border-box;
+    height: 95%;
+    width: 90%;
+    padding: 10px;
+
+    /* Round corners */
+    border-radius: 20px;
+
+    /* Display content in a grid */
+    display: grid;
+    grid-template-rows: 100px 130px calc(100% - 230px);
+    grid-template-columns: 50% 50%;
+}
+
+/* ----------------- Profile picture and name --------------------- */
+
+#pfp-and-name {
+    /* Position in the grid */
+    grid-row: 1;
+    grid-column: 1;
+
+    /* Center profile picture and name vertically */
+    display: flex;
+    align-items: center;
+
+    /* Padding */
+    padding: 5px;
+    padding-left: 15px;
+}
+
+#pfp-container {
+    box-shadow: var(--box-shadow-template);
+    /* Profile picture size */
+    height: 80px;
+    width: 80px;
+    min-width: 80px;
+
+    /* Put profile picture in a circle */
+    border-radius: 50%;
+    border: solid black 3px;
+    overflow: hidden;
+
+    /* Some distance between profile picture and name */
+    margin-right: 10px;
+}
+
+#name-container {
+    font-size: 45px;
+}
+
+/* -------------- Area below profile picture -------------------- */
+
+#user-info {
+    /* Position in the grid */
+    grid-column: 1;
+    grid-row: 2;
+
+    /* Padding */
+    padding: 15px;
+}
+
+#user-info-box {
+    box-shadow: var(--box-shadow-template);
+    /* Color of the box */
+    background-color: var(--rect-color);
+
+    /* Fill the designated space */
+    width: auto;
+    height: 100%;
+
+    /* Padding */
+    box-sizing: border-box;
+    padding: 10px;
+
+    /* Round corners */
+    border-radius: 15px;
+
+    /* Font size */
+    font-size: 18px;
+}
+
+/* Font settings for inputs and buttons */
+
+#user-info-box > input {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#user-info-box > button {    
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ------------------------ Stats -------------------------------- */
+
+#stats {
+    /* Position in the grid */
+    grid-column: 2;
+    grid-row: 1 / 3;
+
+    /* Padding */
+    padding: 15px;
+}
+
+#stats-flexbox {
+    box-shadow: var(--box-shadow-template);
+
+    /* Color of the box */
+    background-color: var(--rect-color);
+
+    /* Size of the box */
+    height: 100%;
+    width: 100%;
+
+    /* Flexbox properties */
+    display: flex;
+    flex-wrap: wrap;
+
+    /* Add vertical scroll when content doesn't fit */
+    overflow-y: auto;
+
+    /* Round corners */
+    border-radius: 25px;
+}
+
+.stats-box-elem {
+    /* Element size */
+    width: 250px;
+    height: 100px;
+    margin-right: 5px;
+    padding: 10px;
+
+    /* Center content vertically */
+    display: flex;
+    align-items: center;
+}
+
+.discipline-img {
+    height: 100px;
+    width: 100px;
+    margin-right: 25px;
+}
+
+.discipline-value {
+    font-weight: bold;
+    font-size: 35px;
+}
+
+/* ------------------------ Friends -------------------------- */
+
+#friends {
+    /* Add scroll if necessary */
+    overflow: auto;
+}
+
+#friends-flexbox {
+    /* Size */
+    width: auto;
+    height: auto;
+    padding: 15px;
+
+    /* Create a flexbox */
+    display: flex;
+    flex-direction: column;
+}
+
+.friends-box-elem {
+    box-shadow: var(--box-shadow-template);
+
+    /* Space between friends */
+    margin: 5px;
+
+    /* Full width */
+    width: auto;
+}
+
+.friends-box-elem-link {
+    /* Background color */
+    background: var(--rect-color);
+    
+    /* Shape of the link */
+    padding: 5px;
+    border-radius: 5px;
+    
+    /* Center content vertically */
+    display: flex;
+    align-items: center;
+}
+
+.friends-box-elem-link:hover {
+    /* Hover color */
+    background: var(--selection-background);
+}
+
+.friends-pfp-container {
+    box-shadow: var(--box-shadow-template);
+
+    /* Size of the profile picture */
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+
+    /* Some distance between profile picture and name */
+    margin-right: 20px;
+
+    /* Make profile picture a circle */
+    overflow: hidden;
+    border-radius: 50%;
+    border: solid black 3px;
+}
+
+.friends-name-container {
+    font-size: 30px;
+}
+
+/* ----------------------- Challenges ------------------------ */
+
+#challenges {
+    /* Add scroll if necessary */
+    overflow: auto;
+}
+
+#challenges-flex {
+    /* Size */
+    width: auto;
+    height: auto;
+    padding: 15px;
+
+    /* Create a flexbox */
+    display: flex;
+    flex-direction: column;
+}
+
+.challenges-box-elem {
+    box-shadow: var(--box-shadow-template);
+
+    /* Background color */
+    background-color: var(--rect-color);
+
+    /* Round corners */
+    border-radius: 5px;
+
+    /* Size */
+    width: 400px;
+    height: 76px;
+    margin: 5px;
+
+    /* For positioning the progress bar */
+    position: relative;
+}
+
+.challenges-box-progress-bar {
+    /* Progress bar shape */
+    border-radius: 5px;
+    height: 100%;
+
+    /* Progress bar color */
+    background: var(--selection-background);
+
+    /* For positioning the progress bar */
+    position: absolute;
+}
+
+.challenges-box-name {
+    /* Size */
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+
+    /* Centering text */
+    text-align: center;
+    line-height: 76px;
+
+    /* Add three dots if the text overflows */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    /* For positioning text */
+    position: absolute;
+}
+
+/* --------------------------Edit profile----------------------*/
+
+.span-forgotpwd{
+    width: 150%;
+    color: purple;
+    left: 25%;
+    bottom: -20%;
+    font-size: 15px;
+    position: absolute;
+}
+
+.forgotpwd-box{
+    width: 400px;
+    height: 450px;
+    position: relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.input-field{
+    width: 80%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: var(--navbar-background);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}

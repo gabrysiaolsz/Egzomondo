@@ -5,6 +5,7 @@
     $conn = oci_connect($user, $password, $db);
     $redirect_to_login = substr($_SERVER["REQUEST_URI"], 0, -8)."log-in";
     $redirect_to_new_challenge = substr($_SERVER["REQUEST_URI"], 0, -8)."new_challenge";
+    $redirect_to_search = substr($_SERVER["REQUEST_URI"], 0, -8)."search";
     $upload_dir = '../../uploads/profilepic/';
 
     if (!$conn) {
@@ -59,8 +60,8 @@
                     <li><a href="../activity">New Activity</a></li>
                 </ol>
                 <div class="search_box">
-                    <input type="search" placeholder="Search">
-                    <a href="#"><span class="fa fa-search"></span></a>
+                    <input type="search" name="keyword" placeholder="Search">
+                    <a href="<?php echo $redirect_to_search ?>"><span class="fa fa-search"></span></a>
                 </div>
             </nav>
         </div>
@@ -94,16 +95,6 @@
                                 echo '<br />';
                             ?>
                             <button onclick="location.href='editprofile.php'">Edit</button>
-                        </div>
-                        <div id="user-info-edit" style="display: none;">
-                            <input type="number" placeholder="Weight (kg)" min="0" step="1" value="<?php echo $weight; ?>" /><br />
-                            <input type="number" placeholder="Height (cm)" min="0" step="1" value="<?php echo $height; ?>" /><br />
-                            <input type="radio" id="male" name="sex" value="male" <?php if ($sex == 1) echo 'checked="checked"'; ?> />
-                            <label for="male">Male</label>
-                            <input type="radio" id="female" name="sex" value="female" <?php if ($sex == 0) echo 'checked="checked"'; ?> />
-                            <label for="female">Female</label><br />
-                            <button type="submit">Save</button>
-                            <button onclick="cancelBtn()">Cancel</button>
                         </div>
                     </div>
                 </div>
