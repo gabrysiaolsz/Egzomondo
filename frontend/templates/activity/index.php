@@ -22,6 +22,7 @@
                             <option value="bieg">Running</option>
                             <option value="plywanie">Swimming</option>
                             <option value="rower">Cycling</option>
+                            <option value="dowolna">All</option>
                         </select>
                     </div>
                 </div>
