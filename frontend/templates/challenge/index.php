@@ -87,10 +87,13 @@
                                     AND A.DATA_ROZPOCZECIA <= W.CZAS_UKONCZENIA AND A.DATA_ROZPOCZECIA>= W.CZAS_ROZPOCZECIA
                                 ) GROUP BY LOGIN, NAZWA
                             ");
-                            oci_execute($stid);
+                            $err = oci_execute($stid);
+                            if(!$err){
+                                $e = oci_error($pars);
+                                var_dump($e);
+                            }
                             
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
-                                echo "kupa";
                                 if ($challenge_unit == 'km') {
                                     $progress = $row[2] / $challenge_goal * 100;
                                 }
@@ -141,9 +144,6 @@
                                 <div class="users-box-elem">
                                     <div class="users-box-elem-link">
                                         <div style="width: 0%" class="users-box-elem-progress-bar">
-                                            <div class="pfp-container">
-                                                <img src="../../style/img/default-pfp.png" />
-                                            </div>
                                             <div class="user-name-field">
                                                 Invite your friends to the challenge
                                             </div>
