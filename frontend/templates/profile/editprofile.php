@@ -186,7 +186,7 @@
                                     <label for="female">Female</label><br /></td>
                             </tr>
                             <tr>  
-                                <td colspan=2><input type="radio" id="ranking" name="ranking" <?php if ($rankingswitch == 1) echo 'checked="checked"'; ?> />   Approval for global rankings.</td>
+                                <td colspan=2><input type="checkbox" id="ranking" name="ranking" <?php if ($rankingswitch == 1) echo 'checked="checked"'; ?> />   Approval for global rankings.</td>
                             </tr>
                         </table>                                       
                         
