@@ -110,7 +110,7 @@
     align-items: center;
 }
 
-#navbar > nav > .search_box > input {
+.search {
     /* Search bar colors */
     background-color: #1e232b;
     color: white;
@@ -128,9 +128,11 @@
 
     /* Space between items */
     margin-right: 2px;
+
+    margin-top: 15px;
 }
 
-#navbar > nav > .search_box > a > .fa-search {
+.fa-search {
     /* Search button colors */
     background: #1e232b;
     color: #fff;
@@ -148,8 +150,11 @@
     /* Border description */
     border: solid black 2px;
     border-radius: 10px;
+
+    margin-top: 15px;
+    margin-right:40px;
 }
 
-#navbar > nav > .search_box > a > .fa-search:hover {
+.fa-search:hover {
     background-color: #df1d58;
 }
