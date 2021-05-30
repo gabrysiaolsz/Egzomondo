@@ -75,17 +75,9 @@
                     <div id="users-flexbox">
                         <?php
                             $stid = oci_parse($conn, "
-                                SELECT LOGIN, NAZWA, SUM(ILOSC) odleglosc, SUM(CZAS_TRWANIA) czas
-                                FROM (
-                                SELECT LOGIN,T.NAZWA,ILOSC,CZAS_TRWANIA
-                                    from KONTO K
-                                    INNER JOIN AKTYWNOSC A on K.ID = A.ID
-                                    INNER JOIN TYP_AKTYWNOSCI T on t.ID = A.ID_RODZAJU
-                                    INNER JOIN UCZESTNICY_WYZWANIA UW on UW.UCZESTNIK = K.ID
-                                    INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID AND A.ID_RODZAJU = W.ID_AKTYWNOSCI
-                                    WHERE W.ID = $id
-                                    AND A.DATA_ROZPOCZECIA <= W.CZAS_UKONCZENIA AND A.DATA_ROZPOCZECIA>= W.CZAS_ROZPOCZECIA
-                                ) GROUP BY LOGIN, NAZWA
+                                SELECT LOGIN, ID
+                                FROM KONTO K, UCZESTNICY_WYZWANIA W
+                                WHERE K.ID = W.uczestnik
                             ");
                             $err = oci_execute($stid);
                             if(!$err){
@@ -94,21 +86,25 @@
                             }
                             
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
-                                if ($challenge_unit == 'km') {
-                                    $progress = $row[2] / $challenge_goal * 100;
-                                }
-                                else {
-                                    $progress = $row[3] / $challenge_goal * 100;
-                                }
+                                
                                 $login = $row[0];
-                                $stid2 = oci_parse($conn, "SELECT id FROM Konto WHERE login='$login'");
-                                oci_execute($stid2);
-                                if (($row2=oci_fetch_row($stid2)) != false) {
-                                    $id_uzytkownika = $row2[0];
-                                } else {
-                                    $error = true;
-                                    #echo "You need to be signed in $login;\n";
-                                }
+                                $id_uzytkownika = $row[1];
+                                $stid2 = oci_parse($conn, "
+                                    SELECT SUM(A.ILOSC) odleglosc, SUM(A.CZAS_TRWANIA) czas
+                                    FROM AKTYWNOSC A, WYZWANIE W
+                                    WHERE A.ID = $id_uzytkownika AND W.id = $id 
+                                    AND A.DATA_ROZPOCZECIA <= W.CZAS_UKONCZENIA AND A.DATA_ROZPOCZECIA>= W.CZAS_ROZPOCZECIA
+                                    GROUP BY A.ID
+                                ");
+                                $err = oci_execute($stid2);
+                                $exists = ($row2 = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS))
+                                if ($challenge_unit == 'km' && $exists) 
+                                    $progress = $row2[0] / $challenge_goal * 100;
+                                else if ($exists) 
+                                    $progress = $row2[1] / $challenge_goal * 100;
+                                else 
+                                    $progress = 0;
+                                
                                 oci_free_statement($stid2);
                                 echo '
                                     <div class="users-box-elem">
