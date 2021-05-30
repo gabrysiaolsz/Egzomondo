@@ -23,6 +23,15 @@ CREATE TABLE Znajomi
     CONSTRAINT rozni CHECK ( znajomy1 <> znajomy2 )
 );
 
+DROP TABLE ZAPROSZENIA_DO_ZNAJOMYCH;
+CREATE TABLE ZAPROSZENIA_DO_ZNAJOMYCH
+(
+    zapraszajacy REFERENCES Konto,
+    zaproszony REFERENCES Konto,
+    CONSTRAINT rozni_zaproszenia CHECK ( zapraszajacy <> zaproszony )
+);
+
+
 CREATE TABLE Typ_aktywnosci
 (
     id number primary key,
@@ -47,6 +56,15 @@ CREATE TABLE Wyzwanie
 ALTER TABLE WYZWANIE
 ADD CONSTRAINT unikalnosc UNIQUE (nazwa,tworca,czas_rozpoczecia,czas_ukonczenia,id_aktywnosci,jednostka_celu,cel);
 commit;
+
+CREATE TABLE ZAPRPOSZENIE_DO_WYZWANIA
+(
+    wyzwanie number REFERENCES WYZWANIE,
+    zapraszajacy REFERENCES Konto,
+    zaproszony REFERENCES Konto,
+    CONSTRAINT rozni_zaproszenie_wyzwanie CHECK ( zapraszajacy <> zaproszony )
+);
+
 
 
 CREATE TABLE UCZESTNICY_WYZWANIA
