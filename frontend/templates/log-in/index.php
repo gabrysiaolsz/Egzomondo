@@ -1,23 +1,11 @@
 <?php
-    // Connects to SQLPLUS database.
-    $user = 'wz418498';
-    $password = 'IO2021';
-    $db = '//labora.mimuw.edu.pl/LABS';
-    $conn = oci_connect($user, $password, $db);
-    $location = substr($_SERVER["REQUEST_URI"], 0, -16)."profile";
-    session_start();
-
-    // Checks whether connection has been done.
-    if (!$conn) {
-        echo "oci_connect failed\n";
-        $e = oci_error();
-        echo $e['message'];
-    }
+    include '../_common/connect_to_db.php';
 
     // Checks whether client is already log on.
-    if ($_SESSION['loggedin'] == TRUE) {
-        header('location:'.$_SESSION['redirectURL']);
-    }
+    session_start();
+    $location = '../profile';
+    if (isset($_SESSION['login']))
+        header('location:'.$location);
 
     // Checks whether the client tries to log in.
     if (isset($_POST['submit-log'])) {
@@ -29,13 +17,9 @@
         if (oci_num_rows($query) < 1) {
             $error = "No profile with that username / Wrong password";
         } else {
-            $_SESSION['loggedin'] = TRUE;
             $_SESSION['login'] = $_POST['login'];
-            $_SESSION['password'] = $_POST['passwd'];
 
-            $stid = oci_parse($conn,
-                "SELECT id FROM Konto WHERE login ='$_POST[login]'"
-            );
+            $stid = oci_parse($conn, "SELECT id FROM Konto WHERE login ='$_POST[login]'");
             oci_execute($stid);
             $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
             $_SESSION['id'] = $row[0];
@@ -74,9 +58,7 @@
             }
             oci_commit($conn);
 
-            $_SESSION['loggedin'] = TRUE;
             $_SESSION['login'] = $_POST['login'];
-            $_SESSION['password'] = $password;
             header('location:'.$location);
             oci_free_statement($insert);
         }
@@ -87,7 +69,7 @@
 
 <html>
     <head>
-        <title> Login and registration</title>
+        <title>Login and registration</title>
         <link rel="shortcut icon" href="../../style/img/logo_icon.png">
         <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
@@ -96,25 +78,7 @@
         <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
     </head>
     <body>
-    <div id="navbar">
-            <nav>
-                <a href="#">
-                    <div class="logo">
-                        <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
-                        <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
-                        <div id="logo-text">Egzomondo</div>
-                    </div>
-                </a>
-                <ol>
-                    <li><a href="../home">Home</a></li>
-                    <li><a href="../about">About us</a></li>
-                </ol>
-                <div class="search_box">
-                    <input type="search" placeholder="Search">
-                    <a href="#"><span class="fa fa-search"></span></a>
-                </div>
-            </nav>
-        </div>
+        <?php include '../_common/navbar_not_logged_in.php' ?>
         <div class="main-box">
             <div class="form-box">
                 <div class="button-box">
@@ -146,4 +110,3 @@
         </div>
     </body>
 </html>
-
