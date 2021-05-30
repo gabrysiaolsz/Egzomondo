@@ -57,13 +57,14 @@ ALTER TABLE WYZWANIE
 ADD CONSTRAINT unikalnosc UNIQUE (nazwa,tworca,czas_rozpoczecia,czas_ukonczenia,id_aktywnosci,jednostka_celu,cel);
 commit;
 
-CREATE TABLE ZAPRPOSZENIE_DO_WYZWANIA
+CREATE TABLE ZAPROSZENIE_DO_WYZWANIA
 (
     wyzwanie number REFERENCES WYZWANIE,
     zapraszajacy REFERENCES Konto,
     zaproszony REFERENCES Konto,
     CONSTRAINT rozni_zaproszenie_wyzwanie CHECK ( zapraszajacy <> zaproszony )
 );
+
 
 
 
