@@ -38,7 +38,7 @@
         <div id="below-navbar">
             <div id="container" style="display:block;">
                 <div id="inner_search">
-                    <table style="margin: 0 auto; padding-left:25%;padding-right:25%">
+                    <table style="margin: 0 auto; margin-left:18%;margin-right:25%">
                         <colgroup>
                             <col span="1" style="width:400px">
                             <col span="1" style="width:400px">
@@ -69,10 +69,11 @@
                                             $user_id  = $row[0];
                                             $username = $row[1];
                                             
+                                            $img_path = '../../style/img/default-pfp.png';
                                             if (file_exists($upload_dir.$user_id.'.png'))
                                                 $img_path = $upload_dir.$user_id.'.png';
                                             echo '
-                                            <div class="friends-box-elem">
+                                            <div class="friends-box-elem" style="width:400px">
                                                 <a href="../profile?id='.$user_id.'">
                                                     <div class="friends-box-elem-link">
                                                         <div class="friends-pfp-container">
