@@ -18,7 +18,7 @@
     session_start();
 
     # If you're not logged in, redirect to login page.
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != TRUE) {
+    if (!isset($_SESSION['login'])) {
         header('location:'.$redirect_to_login);
     }
 
