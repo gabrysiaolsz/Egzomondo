@@ -83,13 +83,14 @@
                                     INNER JOIN TYP_AKTYWNOSCI T on t.ID = A.ID_RODZAJU
                                     INNER JOIN UCZESTNICY_WYZWANIA UW on UW.UCZESTNIK = K.ID
                                     INNER JOIN WYZWANIE W on UW.WYZWANIE = W.ID AND A.ID_RODZAJU = W.ID_AKTYWNOSCI
-                                    WHERE W.ID = ".$id."
+                                    WHERE W.ID = $id
                                     AND A.DATA_ROZPOCZECIA <= W.CZAS_UKONCZENIA AND A.DATA_ROZPOCZECIA>= W.CZAS_ROZPOCZECIA
                                 ) GROUP BY LOGIN, NAZWA
                             ");
                             oci_execute($stid);
                             
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                echo "kupa";
                                 if ($challenge_unit == 'km') {
                                     $progress = $row[2] / $challenge_goal * 100;
                                 }
