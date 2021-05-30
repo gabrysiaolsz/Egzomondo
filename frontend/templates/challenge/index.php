@@ -77,7 +77,7 @@
                             $stid = oci_parse($conn, "
                                 SELECT LOGIN, ID
                                 FROM KONTO K, UCZESTNICY_WYZWANIA W
-                                WHERE K.ID = W.uczestnik
+                                WHERE K.ID = W.uczestnik  AND W.wyzwanie = $id
                             ");
                             $err = oci_execute($stid);
                             if(!$err){
