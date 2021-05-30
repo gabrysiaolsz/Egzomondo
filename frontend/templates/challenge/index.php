@@ -88,7 +88,7 @@
                                 ) GROUP BY LOGIN, NAZWA
                             ");
                             oci_execute($stid);
-
+                            
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
                                 if ($challenge_unit == 'km') {
                                     $progress = $row[2] / $challenge_goal * 100;
@@ -96,12 +96,85 @@
                                 else {
                                     $progress = $row[3] / $challenge_goal * 100;
                                 }
+                                $login = $row[0];
+                                $stid2 = oci_parse($conn, "SELECT id FROM Konto WHERE login='$login'");
+                                oci_execute($stid2);
+                                if (($row2=oci_fetch_row($stid2)) != false) {
+                                    $id_uzytkownika = $row2[0];
+                                } else {
+                                    $error = true;
+                                    #echo "You need to be signed in $login;\n";
+                                }
+                                oci_free_statement($stid2);
+                                echo '
+                                    <div class="users-box-elem">
+                                        <a href="../profile/?id='.$id_uzytkownika.'">
+                                            <div class="users-box-elem-link">
+                                                <div style="width: '.$progress.'%" class="users-box-elem-progress-bar">
+                                                    <div class="pfp-container">
+                                                        <img src="../../style/img/default-pfp.png" />
+                                                    </div>
+                                                    <div class="user-name-field">
+                                                        '.$row[0].'
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                ';
+                            }
+
+                            oci_free_statement($stid);
+
+                            $login = $_SESSION['login'];
+                            $stid = oci_parse($conn, "SELECT id FROM Konto WHERE login='$login'");
+                            oci_execute($stid);
+                            if (($row=oci_fetch_row($stid)) != false) {
+                                $id_uzytkownika = $row[0];
+                            } else {
+                                echo "You need to be signed in $login;\n";
+                            }
+                            oci_free_statement($stid);
+
+                            echo '
+                                <div class="users-box-elem">
+                                    <div class="users-box-elem-link">
+                                        <div style="width: 0%" class="users-box-elem-progress-bar">
+                                            <div class="pfp-container">
+                                                <img src="../../style/img/default-pfp.png" />
+                                            </div>
+                                            <div class="user-name-field">
+                                                Invite your friends to the challenge
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ';
+
+                            $stid = oci_parse($conn, "
+                                SELECT K.LOGIN 
+                                FROM KONTO K, ZNAJOMI Z
+                                WHERE (K.id = Z.znajomy2 AND Z.znajomy1 = $id_uzytkownika) OR (K.id = Z.znajomy1 AND Z.znajomy2 = $id_uzytkownika)
+                                MINUS
+                                SELECT K.LOGIN 
+                                FROM KONTO K, UCZESTNICY_WYZWANIA W
+                                WHERE K.id = W.uczestnik AND W.wyzwanie = $id
+                                MINUS 
+                                SELECT K.LOGIN 
+                                FROM KONTO K, ZAPRPOSZENIE_DO_WYZWANIA W
+                                WHERE K.id = W.zaproszony AND W.wyzwanie = $id
+                            ");
+
+                            oci_execute($stid);
+
+                            while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                
 
                                 echo '
                                     <div class="users-box-elem">
-                                        <a href="#">
+                                        <a href="invite.php?proba=5?id=5">
                                             <div class="users-box-elem-link">
-                                                <div style="width: '.$progress.'%" class="users-box-elem-progress-bar">
+                                                <div style="width: 0%" class="users-box-elem-progress-bar">
                                                     <div class="pfp-container">
                                                         <img src="../../style/img/default-pfp.png" />
                                                     </div>
