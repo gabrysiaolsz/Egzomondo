@@ -67,9 +67,9 @@
                     <?php if (strcmp($not_my_acc, "False") != 0) {?>
                     <div id="add_remove_friend">
                         <?php if (strcmp($not_my_acc, "Yes") == 0) { ?>
-                            <a href="./remove_friend.php?id=<?php echo $id;?>"><i class="fas fa-minus-circle"></i></a>
+                            <a href="./remove_friend.php?id=<?php echo $id;?>"><i class="fas fa-minus-circle fa-3x" style="margin-left:20px;" title="Remove friend"></i></a>
                         <?php } else { ?>
-                            <a href="./add_friend.php?id=<?php echo $id;?>"><i class="fas fa-plus-circle"></i></a>
+                            <a href="./add_friend.php?id=<?php echo $id;?>"><i class="fas fa-plus-circle fa-3x" style="margin-left:20px;" title="Add friend"></i></a>
                         <?php } ?>
                     </div>
                     <?php } ?>
