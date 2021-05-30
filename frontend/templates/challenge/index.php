@@ -152,27 +152,33 @@
                             ';
 
                             $stid = oci_parse($conn, "
-                                SELECT K.LOGIN 
+                                SELECT K.LOGIN, K.id
                                 FROM KONTO K, ZNAJOMI Z
                                 WHERE (K.id = Z.znajomy2 AND Z.znajomy1 = $id_uzytkownika) OR (K.id = Z.znajomy1 AND Z.znajomy2 = $id_uzytkownika)
                                 MINUS
-                                SELECT K.LOGIN 
+                                SELECT K.LOGIN, K.id
                                 FROM KONTO K, UCZESTNICY_WYZWANIA W
                                 WHERE K.id = W.uczestnik AND W.wyzwanie = $id
                                 MINUS 
-                                SELECT K.LOGIN 
-                                FROM KONTO K, ZAPRPOSZENIE_DO_WYZWANIA W
+                                SELECT K.LOGIN, K.id
+                                FROM KONTO K, ZAPROSZENIE_DO_WYZWANIA W
                                 WHERE K.id = W.zaproszony AND W.wyzwanie = $id
                             ");
 
-                            oci_execute($stid);
+                            $err = oci_execute($stid);
+
+                            if (!$err) {
+                                $e = oci_error($pars);
+                                var_dump($e);
+                                return;
+                            }
 
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
                                 
 
                                 echo '
                                     <div class="users-box-elem">
-                                        <a href="invite.php?proba=5?id=5">
+                                        <a href="invite.php?id_zapraszanego='.$row[1].'&id_wyzwania='.$id.'">
                                             <div class="users-box-elem-link">
                                                 <div style="width: 0%" class="users-box-elem-progress-bar">
                                                     <div class="pfp-container">
