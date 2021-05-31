@@ -4,7 +4,7 @@
             <div class="logo">
                 <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
                 <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
-                Egzomondo - About
+                <div id="logo-text">Egzomondo - About</div>
             </div>
             
         </a>
