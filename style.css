@@ -1,0 +1,153 @@
+/* ----------------- Global settings ------------------- */
+
+a {
+    /* Disable decoration for all links */
+    text-decoration: none;
+}
+
+img {
+    /* Make images fill the entire container */
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    /* Background color */
+    background-color: var(--background-color);
+
+    /* Make body fill the whole screen */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+/* --------------- Everything below navbar --------------- */
+
+#below-navbar {
+    /* Fill the rest of the screen */
+    height: calc(100% - 55px);
+    width: 100%;
+
+    /* Center container */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container {
+    /* Shadow */
+    box-shadow: var(--box-shadow-template);
+
+    /* Color of the container */
+    background-color: var(--container-color);
+
+    /* Container size */
+    box-sizing: border-box;
+    height: 95%;
+    width: 30%;
+    padding: 20px;
+
+    /* Round corners */
+    border-radius: 20px;
+
+    /* Scrolling */
+    overflow: auto;
+}
+
+.container-flex {
+    /* Flexbox */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.request {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.friend-request-user {
+    background-color: var(--rect-color);
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 10px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+}
+
+a:hover > .friend-request-user {
+    background-color: pink;
+}
+
+.request-pfp-container {
+    width: 85px;
+    height: 85px;
+    border: solid 2px black;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    margin-right: 15px;
+}
+
+.request-user-name {
+    font-size: 30px;
+}
+
+.challenge-request-user {
+    background-color: var(--rect-color);
+    border-radius: 15px;
+
+    padding: 10px;
+    height: 89px;
+    line-height: 89px;
+
+    font-size: 30px;
+    text-align: center;
+}
+
+.challenge-request-user:hover {
+    background-color: pink;
+}
+
+.buttons {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons > a {
+    display: block;
+    width: calc(50% - 5px);
+}
+
+.accept-button {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 5px;
+    text-align: center;
+
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.reject-button {
+    background-color: #b31613;
+}
+
+.accept-button:hover {
+    background-color: greenyellow;
+}
+
+.reject-button:hover {
+    background-color: #e7221f;
+}
