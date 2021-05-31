@@ -49,9 +49,17 @@
         $err = oci_execute($stid);
 
         if (!$err) {
-            echo "Error:";
-            $e = oci_error($stid);
-            var_dump($e);
+            echo '<html>
+                <head>
+                    <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                    <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                    <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                    <link rel="stylesheet" type="text/css" href="style.css">
+                    <script src="script.js"></script>
+                    <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+                </head>
+                <body>';
+            echo 'Accepting invite was unsuccessful</body></html>';
             return;
         }
 
@@ -62,9 +70,18 @@
             $err = oci_execute($stid);
 
             if (!$err) {
-                echo "Error:";
-                $e = oci_error($stid);
-                var_dump($e);
+                echo '<html>
+                    <head>
+                        <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                        <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                        <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                        <link rel="stylesheet" type="text/css" href="style.css">
+                        <script src="script.js"></script>
+                        <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+                    </head>
+                    <body>';
+                include '../_common/navbar.php';
+                echo 'Accepting invite was unsuccessful</body></html>';
                 return;
             }
             oci_commit($conn);
@@ -80,9 +97,19 @@
         $err = oci_execute($stid);
 
         if (!$err) {
-            echo "Error deleting:";
-            $e = oci_error($stid);
-            var_dump($e);
+            echo '<html>
+                <head>
+                    <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                    <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                    <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                    <link rel="stylesheet" type="text/css" href="style.css">
+                    <script src="script.js"></script>
+                    <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+                </head>
+                <body>';
+            include '../_common/navbar.php';
+            echo 'Accepting invite was unsuccessful</body></html>';
+            return;
             
         }
         oci_free_statement($stid);
@@ -93,9 +120,18 @@
             $err = oci_execute($stid);
 
             if (!$err) {
-                echo "Error:";
-                $e = oci_error($stid);
-                var_dump($e);
+                echo '<html>
+                    <head>
+                        <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                        <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                        <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                        <link rel="stylesheet" type="text/css" href="style.css">
+                        <script src="script.js"></script>
+                        <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+                    </head>
+                    <body>';
+                include '../_common/navbar.php';
+                echo 'Accepting invite was unsuccessful</body></html>';
                 return;
             }
             oci_commit($conn);

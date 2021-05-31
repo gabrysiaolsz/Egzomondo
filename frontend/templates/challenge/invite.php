@@ -33,12 +33,19 @@
     $pars = oci_parse($conn, $query);
     $err = oci_execute($pars);
     if (!$err) {
-        echo "kupa ";
-        echo $query;
-        $e = oci_error($pars);
-
-        var_dump($e);
-        echo " kupa";
+        echo '<html>
+        <head>
+            <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+            <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+            <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <script src="script.js"></script>
+            <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+        </head>
+        <body>
+        ';
+        include '../_common/navbar.php';
+        echo 'Inviting was unsuccessful</body></html>';
     }
     oci_commit($conn);
     oci_free_statement($pars);
