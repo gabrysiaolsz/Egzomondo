@@ -12,7 +12,7 @@
             <li><a href="../activity">New Activity</a></li>
             <li><a href="../new_challenge">New Challenge</a></li>
             <li><a href="../about">About</a></li>
-            <li><a href="logout.php">Log out</a></li>
+            <li><a href="./logout.php">Log out</a></li>
         </ol>
         <div class="search_box">
             <form action="../search/index.php" method="POST" class="search_box" >
