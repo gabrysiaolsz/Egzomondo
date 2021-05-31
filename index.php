@@ -88,7 +88,7 @@
                                 return;
                             }
 
-                            $row2 = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
+                            $row2 = oci_fetch_array($stid2, OCI_BOTH  + OCI_RETURN_NULLS);
 
                             echo '
                             <div class="request">
