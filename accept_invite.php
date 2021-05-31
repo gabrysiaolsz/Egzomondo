@@ -9,7 +9,7 @@
     $conn = oci_connect($user, $password, $db);
 
     if (!$conn) {
-        echo "oci_connect failed\n";
+        echo "oci_connect failed</br>";
         $e = oci_error();
         echo $e['message'];
         return;
@@ -21,21 +21,21 @@
 
     if (!isset($_GET['challenge'])) {
         $error = true;
-        echo "No challenge id provided!\n";
+        echo "No challenge id provided!</br>";
         return;
     }
     $id_wyzwania = $_GET['challenge'];
 
     if (!isset($_GET['accept'])) {
         $error = true;
-        echo "No accept provided!\n";
+        echo "No accept provided!</br>";
         return;
     }
     $accept = $_GET['accept'];
 
     if (!isset($_GET['inviter'])) {
         $error = true;
-        echo "No inviter id provided!\n";
+        echo "No inviter id provided!</br>";
         return;
     }
     $inviter = $_GET['inviter'];
