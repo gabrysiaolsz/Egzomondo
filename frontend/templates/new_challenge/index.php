@@ -20,7 +20,7 @@
                         <p>Choose challenge name and activity type.</p>
                         <div>
                             <label for="challenge_name">Name:</label>
-                            <input type="text" name="challenge_name" class="w3-container" required="">
+                            <input type="text" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="challenge_name" class="w3-container" required="">
                             <br /><br />
                             <label for="activity_type">Activity:</label>
                             <select name="activity_type" class="w3-container">
@@ -55,7 +55,7 @@
                         <p>Enter unit and numerical goal:</p>
                         <div>
                             <label for="objective">Goal:</label>
-                            <input type="number" value="5" name="objective" min="1" max="100" required="">
+                            <input type="number" value="5" name="objective" min="1" max="1000" required="">
                             <select name="objective_unit">
                                 <option value="km">km</option>
                                 <option value="min">min</option>
