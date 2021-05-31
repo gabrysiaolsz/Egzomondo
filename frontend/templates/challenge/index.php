@@ -184,7 +184,7 @@
                                             <div class="users-box-elem-link">
                                                 <div style="width: 0%" class="users-box-elem-progress-bar">
                                                     <div class="pfp-container">
-                                                        <img src="../../style/img/logo_icon.png" />
+                                                        <img src="../../style/img/green_plus.png" />
                                                     </div>
                                                     <div class="user-name-field">
                                                         '.$row[0].'
