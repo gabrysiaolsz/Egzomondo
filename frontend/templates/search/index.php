@@ -38,7 +38,7 @@
         <div id="below-navbar">
             <div id="container" style="display:block;">
                 <div id="inner_search">
-                    <table style="margin: 0 auto; margin-left:18%;margin-right:25%">
+                    <table style="margin: 0 auto; margin-left:20%;margin-right:20%">
                         <colgroup>
                             <col span="1" style="width:400px">
                             <col span="1" style="width:400px">
@@ -46,12 +46,12 @@
                     
                         <tr>
                             <td colspan=2>
-                                <h1 style="text-align:center"> You've searched for <?php echo $_POST['keyword']; ?> </h1>
+                                <div class="section-header"><h4 style="text-align:center"> You've searched for <?php echo $_POST['keyword']; ?> </h4></div>
                             </td>
                         </tr>
                         <tr>
-                        <td><h1 style="text-align:center"> Users: </h1></td>
-                        <td><h1 style="text-align:center"> Challenges: </h1></td>
+                        <td><div class="section-header"><h4 style="text-align:center"> Users: </h4></td></div>
+                        <td><div class="section-header"><h4 style="text-align:center"> Challenges: </h4></td></div>
                         </tr>
                         <tr><td>
                             <!-- Friends -->

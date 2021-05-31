@@ -357,3 +357,31 @@ body {
     outline: none;
     border-radius: 30px;
 }
+
+
+.accept-button {
+    width: 100%;
+    height: 25%;
+
+    border-radius: 5px;
+    text-align: center;
+
+    display: block;
+    flex: left;
+    margin-left: 10px;
+
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.reject-button {
+    background-color: #b31613;
+}
+
+.accept-button:hover {
+    background-color: greenyellow;
+}
+
+.reject-button:hover {
+    background-color: #e7221f;
+}

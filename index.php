@@ -43,11 +43,14 @@
                     <li><a href="./frontend/templates/activity">New Activity</a></li>
                 </ol>
                 <div class="search_box">
-                    <input type="search" placeholder="Search">
-                    <a href="#"><span class="fa fa-search"></span></a>
+                    <form action="./frontend/templates/search/index.php" method="POST" class="search_box" >
+                        <input type="input" class="search" id="keyword" name="keyword" placeholder="Search">
+                        <button type="submit" name="submit" class="fa fa-search"></button>
+                    </form>
                 </div>
             </nav>
         </div>
+
         <div id="below-navbar">
             <div class="container">
                 <div class="section-header">Friend requests</div>
@@ -92,8 +95,14 @@
                             <div class="request">
                                 <a href="frontend/templates/profile/?id='.$row[0].'">
                                     <div class="friend-request-user">
-                                        <div class="request-pfp-container">
-                                            <img src="img.jpg" />
+                                        <div class="request-pfp-container">';
+                                        #echo $upload_dir.$row[5].'.png';
+                                        if (file_exists($upload_dir.$row[5].'.png')) {
+                                            echo'<img src="'.$upload_dir.$row[5].'.png" />';
+                                        } else {
+                                            echo        '<img src="./frontend/style/img/default-pfp.png" />';
+                                        }
+                                        echo   '
                                         </div>
                                         <div class="request-user-name">'.$row2[0].'</div>
                                     </div>
