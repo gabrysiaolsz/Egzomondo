@@ -30,7 +30,28 @@
 
             if (oci_num_rows($query) < 1) {
                 // S/he's not.
-                $not_my_acc = "No";
+
+                $q = "SELECT * FROM ZAPROSZENIA_DO_ZNAJOMYCH WHERE ZAPRASZAJACY = $_GET[id] AND ZAPROSZONY = (SELECT id FROM KONTO WHERE login = '$_SESSION[login]')";
+                $query = oci_parse($conn, $q);
+                oci_execute($query);
+                oci_fetch($query);
+
+                if (oci_num_rows($query) < 1) {
+                    $q = "SELECT * FROM ZAPROSZENIA_DO_ZNAJOMYCH WHERE ZAPRASZAJACY = (SELECT id FROM KONTO WHERE login = '$_SESSION[login]') AND ZAPROSZONY = $_GET[id]";
+                    $query = oci_parse($conn, $q);
+                    oci_execute($query);
+                    oci_fetch($query);
+
+                    if (oci_num_rows($query) < 1) {
+                        // Friend extending.
+                        $not_my_acc = "No";
+                    } else {
+                        $not_my_acc = "Exec";
+                    }
+                } else {
+                    // Friend inpending.
+                    $not_my_acc = "friend_request";
+                }
             } else {
                 // S/he is.
                 $not_my_acc = "Yes";
@@ -68,8 +89,15 @@
                     <div id="add_remove_friend">
                         <?php if (strcmp($not_my_acc, "Yes") == 0) { ?>
                             <a href="./remove_friend.php?id=<?php echo $id;?>"><i class="fas fa-minus-circle fa-3x" style="margin-left:20px;" title="Remove friend"></i></a>
-                        <?php } else { ?>
+                        <?php } else if (strcmp($not_my_acc, "No") == 0) { ?>
                             <a href="./add_friend.php?id=<?php echo $id;?>"><i class="fas fa-plus-circle fa-3x" style="margin-left:20px;" title="Add friend"></i></a>
+                        <?php } else if (strcmp($not_my_acc, "Exec") == 0) { ?>
+                            <a href="./revoke_request.php?id=<?php echo $id;?>"><i class="fas fa-question-circle fa-3x" style="margin-left:20px;" title="Revoke request"></i></a>
+                        <?php } else if (strcmp($not_my_acc, "friend_request") == 0) { ?>
+                            <div class="buttons">
+                                <a href="../../../accept_invite.php?accept=1&inviter='.$row[0].'&challenge=0"><div class="accept-button">Accept</div></a>
+                                <a href="../../../accept_invite.php?accept=0&inviter='.$row[0].'&challenge=0"><div class="accept-button reject-button">Decline</div></a>
+                            </div>
                         <?php } ?>
                     </div>
                     <?php } ?>

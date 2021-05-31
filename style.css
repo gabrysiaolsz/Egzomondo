@@ -206,3 +206,52 @@ a:hover > .friend-request-user {
     height: 40px;
     margin-right: 10px;
 }
+
+.search {
+    /* Search bar colors */
+    background-color: #1e232b;
+    color: white;
+
+    /* Size */
+    box-sizing: border-box;
+    font-size: 20px;
+    width: 300px;
+    height: 100%;
+    padding: 0 5px;
+
+    /* Border settings */
+    border: solid black 2px;
+    border-radius: 10px;
+
+    /* Space between items */
+    margin-right: 2px;
+
+    margin-top: 15px;
+}
+
+.fa-search {
+    /* Search button colors */
+    background: #1e232b;
+    color: #fff;
+
+    /* Size */
+    height: 100%;
+    width: 45px;
+    padding: 8px;
+    font-size: 20px;
+
+    /* Center the search symbol */
+    text-align: center;
+    line-height: 20px;
+
+    /* Border description */
+    border: solid black 2px;
+    border-radius: 10px;
+
+    margin-top: 15px;
+    margin-right:40px;
+}
+
+.fa-search:hover {
+    background-color: #df1d58;
+}

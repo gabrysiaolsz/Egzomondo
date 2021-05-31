@@ -43,11 +43,14 @@
                     <li><a href="./frontend/templates/activity">New Activity</a></li>
                 </ol>
                 <div class="search_box">
-                    <input type="search" placeholder="Search">
-                    <a href="#"><span class="fa fa-search"></span></a>
+                    <form action="./frontend/templates/search/index.php" method="POST" class="search_box" >
+                        <input type="input" class="search" id="keyword" name="keyword" placeholder="Search">
+                        <button type="submit" name="submit" class="fa fa-search"></button>
+                    </form>
                 </div>
             </nav>
         </div>
+
         <div id="below-navbar">
             <div class="container">
                 <div class="section-header">Friend requests</div>

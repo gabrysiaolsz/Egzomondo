@@ -6,7 +6,7 @@
         header('location:../profile');
     }
 
-    $i = "INSERT INTO ZAPROSZENIA_DO_ZNAJOMYCH VALUES ((SELECT ID FROM KONTO WHERE LOGIN = '$_SESSION[login]'), $_GET[id])";
+    $i = "DELETE FROM ZAPROSZENIA_DO_ZNAJOMYCH WHERE ZAPRASZAJACY = (SELECT ID FROM KONTO WHERE LOGIN = '$_SESSION[login]') AND ZAPROSZONY = $_GET[id]";
     $insert = oci_parse($conn, $i);
 
     $rc = oci_execute($insert);
