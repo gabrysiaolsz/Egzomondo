@@ -23,7 +23,8 @@
             $not_my_acc = "True";
             # Check if is my friend.
 
-            $q = "SELECT * FROM ZNAJOMI WHERE ZNAJOMY1 = (SELECT id FROM KONTO WHERE login = '$_SESSION[login]') AND ZNAJOMY2 = $_GET[id]";
+            $q = "SELECT * FROM ZNAJOMI WHERE ZNAJOMY1 = (SELECT id FROM KONTO WHERE login = '$_SESSION[login]') AND ZNAJOMY2 = $_GET[id]
+                                            OR ZNAJOMY1 = $_GET[id] AND ZNAJOMY2 = (SELECT id FROM KONTO WHERE login = '$_SESSION[login]')";
             $query = oci_parse($conn, $q);
             oci_execute($query);
             oci_fetch($query);
