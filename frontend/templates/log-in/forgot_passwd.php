@@ -1,5 +1,4 @@
 <?php
-    include '../_common/redirect_to_login.php';
     include '../_common/connect_to_db.php';
 
     $firststyle = "";

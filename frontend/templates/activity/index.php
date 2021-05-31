@@ -3,6 +3,7 @@
     <head>
         <title>Add new activity</title>
         <meta charset="UTF-8">
+        <link rel="shortcut icon" href="../../style/img/logo_icon.png">
         <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
         <link rel="stylesheet" type="text/css" href="style.css">
