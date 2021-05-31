@@ -3,7 +3,6 @@
         <a href="../about">
             <div class="logo">
                 <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
-                <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
                 <div id="logo-text"><a href="../about">Egzomondo - About</a></div>
             </div>
         </a>
