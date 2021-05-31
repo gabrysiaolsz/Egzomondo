@@ -90,7 +90,7 @@
                             }
 
                             $row2 = oci_fetch_array($stid2, OCI_BOTH  + OCI_RETURN_NULLS);
-
+                            $upload_dir = './frontend/uploads/profilepic/';
                             echo '
                             <div class="request">
                                 <a href="frontend/templates/profile/?id='.$row[0].'">
