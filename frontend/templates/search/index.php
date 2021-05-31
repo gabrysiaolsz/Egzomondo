@@ -13,7 +13,7 @@
     include '../_common/redirect_to_login.php';
 
     if (!$conn) {
-        echo "oci_connect failed\n";
+        echo "oci_connect failed</br>";
         $e = oci_error();
         echo $e['message'];
     }

@@ -9,7 +9,7 @@
     $conn = oci_connect($user, $password, $db);
 
     if (!$conn) {
-        echo "oci_connect failed\n";
+        echo "oci_connect failed</br>";
         $e = oci_error();
         echo $e['message'];
         return;

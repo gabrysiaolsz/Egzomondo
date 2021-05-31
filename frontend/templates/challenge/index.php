@@ -9,7 +9,7 @@
     $error = false;
     if (!isset($_GET['id'])) {
         $error = true;
-        echo "No id provided!\n";
+        echo "No id provided!</br>";
         return;
     }
     $id = $_GET['id'];
