@@ -59,7 +59,6 @@
                     <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
                 </head>
                 <body>';
-            include '../_common/navbar.php';
             echo 'Accepting invite was unsuccessful</body></html>';
             return;
         }
