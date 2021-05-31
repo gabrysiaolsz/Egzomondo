@@ -95,8 +95,14 @@
                             <div class="request">
                                 <a href="frontend/templates/profile/?id='.$row[0].'">
                                     <div class="friend-request-user">
-                                        <div class="request-pfp-container">
-                                            <img src="img.jpg" />
+                                        <div class="request-pfp-container">';
+                                        #echo $upload_dir.$row[5].'.png';
+                                        if (file_exists($upload_dir.$row[5].'.png')) {
+                                            echo'<img src="'.$upload_dir.$row[5].'.png" />';
+                                        } else {
+                                            echo        '<img src="./frontend/style/img/default-pfp.png" />';
+                                        }
+                                        echo   '
                                         </div>
                                         <div class="request-user-name">'.$row2[0].'</div>
                                     </div>
