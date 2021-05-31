@@ -1,4 +1,3 @@
-<?php include '../_common/redirect_to_login.php'; ?>
 <html>
 <head>
     <title>About</title>
