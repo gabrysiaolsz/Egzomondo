@@ -84,11 +84,13 @@
                                 $e = oci_error($pars);
                                 var_dump($e);
                             }
+                            $participating = false;
                             
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
                                 
                                 $login = $row[0];
                                 $id_uzytkownika = $row[1];
+                                if($id_uzytkownika == $_SESSION['id']) $participating = true;
                                 $stid2 = oci_parse($conn, "
                                     SELECT SUM(A.ILOSC) odleglosc, SUM(A.CZAS_TRWANIA) czas
                                     FROM AKTYWNOSC A, WYZWANIE W
@@ -97,7 +99,7 @@
                                     GROUP BY A.ID
                                 ");
                                 $err = oci_execute($stid2);
-                                $exists = ($row2 = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS));
+                                $exists = ($row2 = oci_fetch_array($stid2, OCI_BOTH  + OCI_RETURN_NULLS));
                                 if ($challenge_unit == 'km' && $exists) 
                                     $progress = $row2[0] / $challenge_goal * 100;
                                 else if ($exists) 
@@ -135,18 +137,21 @@
                                 echo "You need to be signed in $login;\n";
                             }
                             oci_free_statement($stid);
-
-                            echo '
-                                <div class="users-box-elem">
-                                    <div class="users-box-elem-link">
-                                        <div style="width: 0%" class="users-box-elem-progress-bar">
-                                            <div class="user-name-field">
-                                                Invite your friends to the challenge
+                            if(!$participating){
+                                echo '
+                                    <div class="users-box-elem">
+                                        <a href="join.php?id_wyzwania='.$id.'">
+                                            <div class="users-box-elem-link">
+                                                <div style="width: 0%" class="users-box-elem-progress-bar">
+                                                    <div class="user-name-field">
+                                                        Join
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
-                            ';
+                                ';
+                            }
 
                             $stid = oci_parse($conn, "
                                 SELECT K.LOGIN, K.id
@@ -159,7 +164,7 @@
                                 MINUS 
                                 SELECT K.LOGIN, K.id
                                 FROM KONTO K, ZAPROSZENIE_DO_WYZWANIA W
-                                WHERE K.id = W.zaproszony AND W.wyzwanie = $id
+                                WHERE K.id = W.zaproszony AND W.wyzwanie = $id                              
                             ");
 
                             $err = oci_execute($stid);
@@ -179,7 +184,7 @@
                                             <div class="users-box-elem-link">
                                                 <div style="width: 0%" class="users-box-elem-progress-bar">
                                                     <div class="pfp-container">
-                                                        <img src="../../style/img/default-pfp.png" />
+                                                        <img src="../../style/img/logo_icon.png" />
                                                     </div>
                                                     <div class="user-name-field">
                                                         '.$row[0].'
