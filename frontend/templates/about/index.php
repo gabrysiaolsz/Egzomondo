@@ -33,12 +33,12 @@
             <div class="w3-card w3-container">
                 <h3>What is it?</h3><br>
                     The main goal of the website is for the users to make and participate 
-                    in sport challenges<br>
+                    in sport challenges.<br>
                     You choose the activity type of the challenge, duration and the goal.
                     You can invite friends to join your challenge, or keep it just 
                     to yourself. <br>
-                    After completing a workout, dont forget to add it to the website - if your
-                    training matches the criteria of a ongoing challenge, your progress will be listed
+                    After completing a workout, don't forget to add it to the website - if your
+                    training matches the criteria of an ongoing challenge, your progress will be listed
                     on the page.                  
             </div>
         </div>
