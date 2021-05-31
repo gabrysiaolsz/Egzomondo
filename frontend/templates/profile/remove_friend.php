@@ -25,6 +25,15 @@
                 echo 'Removing friend was unsuccessful';
                 return;
             }
+        
+            $i = "DELETE FROM ZNAJOMI WHERE ZNAJOMY2 = (SELECT ID FROM KONTO WHERE LOGIN = '$_SESSION[login]') AND ZNAJOMY1 = $_GET[id]";
+            $insert = oci_parse($conn, $i);
+
+            $rc = oci_execute($insert);
+            if (!$rc) {
+                echo 'Removing friend was unsuccessful';
+                return;
+            }
             oci_commit($conn);
             header("location:../profile/?id=$_GET[id]");
         ?>
