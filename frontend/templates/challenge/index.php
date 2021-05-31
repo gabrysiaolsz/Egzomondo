@@ -99,7 +99,7 @@
                                     GROUP BY A.ID
                                 ");
                                 $err = oci_execute($stid2);
-                                $exists = ($row2 = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS));
+                                $exists = ($row2 = oci_fetch_array($stid2, OCI_BOTH  + OCI_RETURN_NULLS));
                                 if ($challenge_unit == 'km' && $exists) 
                                     $progress = $row2[0] / $challenge_goal * 100;
                                 else if ($exists) 
@@ -184,7 +184,7 @@
                                             <div class="users-box-elem-link">
                                                 <div style="width: 0%" class="users-box-elem-progress-bar">
                                                     <div class="pfp-container">
-                                                        <img src="../../style/img/default-pfp.png" />
+                                                        <img src="../../style/img/logo_icon.png" />
                                                     </div>
                                                     <div class="user-name-field">
                                                         '.$row[0].'
