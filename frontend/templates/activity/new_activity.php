@@ -28,8 +28,33 @@
     }
     oci_free_statement($pars);
 
+    switch($id_aktywnosci){
+        case 1:
+            $mnoznik = $ilosc/$czas/60*2/3;
+            break;
+        
+        case 3:
+            $mnoznik = 8;
+            break;
+        default:
+            $mnoznik = 7;
+            break;
+    }
+
+    $pars = oci_parse($conn, "SELECT waga FROM Konto WHERE id = $id_uzytkownika");
+    oci_execute($pars);
+    if (($row=oci_fetch_row($pars)) != false) {
+        $waga = $row[0];
+    } else if (!$error) {
+        $error = true;
+        echo "No such activity as $id_aktywnosci\n";
+    }
+    oci_free_statement($pars);
+
+    $kcal = $czas * $mnoznik *3.5* $waga/200;
+
     if (!$error) {
-        $query = "INSERT INTO Aktywnosc VALUES ($id_uzytkownika, $id_aktywnosci, $ilosc, TO_DATE('$czas_rozpoczecia', 'YYYY-MM-DD'), $czas)";
+        $query = "INSERT INTO Aktywnosc VALUES ($id_uzytkownika, $id_aktywnosci, $ilosc, TO_DATE('$czas_rozpoczecia', 'YYYY-MM-DD'), $czas, $kcal)";
         $pars = oci_parse($conn, $query);
         $err = oci_execute($pars);
         if (!$err) {
