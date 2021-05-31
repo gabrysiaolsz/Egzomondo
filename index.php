@@ -65,7 +65,7 @@
 
                         if (!$err) {
                             echo "Error finding friend requests:";
-                            $e = oci_error($pars);
+                            $e = oci_error($stid);
                             var_dump($e);
                             return;
                         }
@@ -81,7 +81,7 @@
 
                             if (!$err) {
                                 echo "Error finding inviter name:";
-                                $e = oci_error($pars);
+                                $e = oci_error($stid);
                                 var_dump($e);
                                 return;
                             }
@@ -124,7 +124,7 @@
 
                         if (!$err) {
                             echo "Error finding challenge invites:";
-                            $e = oci_error($pars);
+                            $e = oci_error($stid);
                             var_dump($e);
                             return;
                         }
@@ -169,7 +169,7 @@
 
                         if (!$err) {
                             echo "Error finding challenge invites:";
-                            $e = oci_error($pars);
+                            $e = oci_error($stid);
                             var_dump($e);
                             return;
                         }
@@ -185,7 +185,7 @@
 
                             if (!$err) {
                                 echo "Error:";
-                                $e = oci_error($pars);
+                                $e = oci_error($stid2);
                                 var_dump($e);
                                 return;
                             }
