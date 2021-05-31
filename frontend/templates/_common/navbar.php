@@ -11,7 +11,7 @@
             <li><a href="../profile">My Profile</a></li>
             <li><a href="../activity">New Activity</a></li>
             <li><a href="../new_challenge">New Challenge</a></li>
-            <li><a href="../about">About us</a></li>
+            <li><a href="../about">About</a></li>
         </ol>
         <div class="search_box">
             <form action="../search/index.php" method="POST" class="search_box" >

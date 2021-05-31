@@ -1,0 +1,44 @@
+.w3-center * {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+.w3-center {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.w3-third {
+    box-shadow: var(--box-shadow-template);
+    background-color: white;
+    width: 25%;
+}
+
+.w3-row-padding, .w3-row-padding>.w3-third{
+    padding: 0 8px;
+}
+
+.w3-container {
+    padding: 0.01em 16px;
+    font-size: medium;
+}
+
+.w3-card {
+    position: relative;
+    height: 450px;
+}
+
+.w3-margin-top {
+    margin-top: 3% !important;
+}
+
+.w3-margin-bottom {
+    margin-bottom: 16px !important;
+}
