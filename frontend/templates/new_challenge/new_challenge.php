@@ -52,8 +52,19 @@
         $pars = oci_parse($conn, $query);
         $err = oci_execute($pars);
         if (!$err) {
-            $e = oci_error($pars);
-            var_dump($e);
+            echo '<html>
+            <head>
+                <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                <link rel="stylesheet" type="text/css" href="style.css">
+                <script src="script.js"></script>
+                <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+            </head>
+            <body>';
+            include '../_common/navbar.php';
+            echo 'Joining was unsuccessful</body></html>';
+            return;
         }
         oci_commit($conn);
         oci_free_statement($pars);
@@ -64,8 +75,19 @@
         $row = oci_fetch_array($pars, OCI_BOTH + OCI_RETURN_NULLS);
         $id_wyzwania = $row[0];
         if (!$err) {
-            $e = oci_error($pars);
-            var_dump($e);
+            echo '<html>
+            <head>
+                <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                <link rel="stylesheet" type="text/css" href="style.css">
+                <script src="script.js"></script>
+                <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+            </head>
+            <body>';
+            include '../_common/navbar.php';
+            echo 'Joining was unsuccessful</body></html>';
+            return;
         }
         oci_commit($conn);
         oci_free_statement($pars);
@@ -74,8 +96,19 @@
         $pars = oci_parse($conn, $query);
         $err &= oci_execute($pars);
         if (!$err) {
-            $e = oci_error($pars);
-            var_dump($e);
+            echo '<html>
+            <head>
+                <link rel="shortcut icon" href="../../style/img/logo_icon.png">
+                <link rel="stylesheet" type="text/css" href="../../style/css/global-style.css" />
+                <link rel="stylesheet" type="text/css" href="../../style/css/navbar-style.css" />
+                <link rel="stylesheet" type="text/css" href="style.css">
+                <script src="script.js"></script>
+                <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+            </head>
+            <body>';
+            include '../_common/navbar.php';
+            echo 'Joining was unsuccessful</body></html>';
+            return;
         }
         oci_commit($conn);
         oci_free_statement($pars);
