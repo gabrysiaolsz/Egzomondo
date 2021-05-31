@@ -18,14 +18,11 @@
 ?>
 <html>
     <head>
-        <title>
-            Egzomondo
-        </title>
-
+        <title>Egzomondo</title>
+        <link rel="shortcut icon" href="./frontend/style/img/logo_icon.png">
         <link rel="stylesheet" type="text/css" href="./frontend/style/css/global-style.css" />
         <link rel="stylesheet" type="text/css" href="./frontend/style/css/navbar-style.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
-
         <script src="https://kit.fontawesome.com/67c66657c7.js"></script>
     </head>
     <body>
@@ -53,6 +50,7 @@
         </div>
         <div id="below-navbar">
             <div class="container">
+                <div class="section-header">Friend requests</div>
                 <div class="container-flex">
                     
                     <?php
@@ -110,11 +108,54 @@
                 </div>
             </div>
             <div class="container">
+                <div class="section-header">Latest activities</div>
                 <div class="container-flex">
-
+                    <div class="activity">
+                        <div class="activity-user">
+                            <div class="activity-pfp-container">
+                                <img src="img.png" />
+                            </div>
+                            <div class="activity-username">janusz</div>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-type-img-container">
+                                <img src="2.png" />
+                            </div>
+                            <div class="">2km / 56min</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="activity-user">
+                            <div class="activity-pfp-container">
+                                <img src="img.png" />
+                            </div>
+                            <div class="activity-username">janusz</div>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-type-img-container">
+                                <img src="2.png" />
+                            </div>
+                            <div class="">2km / 56min</div>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="activity-user">
+                            <div class="activity-pfp-container">
+                                <img src="img.png" />
+                            </div>
+                            <div class="activity-username">janusz</div>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-type-img-container">
+                                <img src="2.png" />
+                            </div>
+                            <div class="">2km / 56min</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="container">
+                <div class="section-header">Challenge requests</div>
                 <div class="container-flex">
                     <?php
                         $id_uzytkownika = $_SESSION['id'];
@@ -169,3 +210,4 @@
         </div>
     </body>
 </html>
+<?php oci_close($conn); ?>
