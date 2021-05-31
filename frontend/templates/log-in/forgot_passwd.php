@@ -1,5 +1,4 @@
 <?php
-    include '../_common/redirect_to_login.php';
     include '../_common/connect_to_db.php';
 
     $firststyle = "";
@@ -66,8 +65,8 @@
                 <div id="newpasswd" style="<?php echo $secondstyle?>">
                     <form action="forgot_passwd.php" method="POST" class="input-group" style="top:50px;left:50px">
                         <input type="hidden" name="login" value="<?php echo $_POST[login]?>">
-                        <input type="text" name="newpwd" class="input-field" placeholder="New password" required>
-                        <input type="text" name="newpwd2" class="input-field" placeholder="New password" required>
+                        <input type="password" name="newpwd" class="input-field" placeholder="New password" required>
+                        <input type="password" name="newpwd2" class="input-field" placeholder="New password" required>
                         <button type="submit" name="passwdsubmit" class="submit-btn" style="top:130px">Update password</button>
                     </form>
                 </div>
