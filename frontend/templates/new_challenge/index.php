@@ -21,7 +21,7 @@
                         <p>Choose challenge name and activity type.</p>
                         <div>
                             <label for="challenge_name">Name:</label>
-                            <input type="text" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="challenge_name" class="w3-container" required="">
+                            <input type="text" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="challenge_name" class="w3-container" required="">
                             <br /><br />
                             <label for="activity_type">Activity:</label>
                             <select name="activity_type" class="w3-container">

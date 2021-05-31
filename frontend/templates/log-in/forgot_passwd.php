@@ -58,15 +58,15 @@
                 <b><h2 style="text-align: center;">Reset password<?php echo $username?></h2></b>
                 <div id="user" style="<?php echo $firststyle?>">
                     <form action="forgot_passwd.php" method="POST" id="userinput" class="input-group" style="top:50px;left:50px">
-                        <input type="text" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" class="input-field" placeholder="User id" required><br><br><br><br>
+                        <input type="text" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="login" class="input-field" placeholder="User id" required><br><br><br><br>
                         <button type="submit" name="usersubmit" class="submit-btn" style="top:150px">Submit</button>
                     </form>
                 </div>
                 <div id="newpasswd" style="<?php echo $secondstyle?>">
                     <form action="forgot_passwd.php" method="POST" class="input-group" style="top:50px;left:50px">
                         <input type="hidden" name="login" value="<?php echo $_POST[login]?>">
-                        <input type="password" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="newpwd" class="input-field" placeholder="New password" required>
-                        <input type="password" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="newpwd2" class="input-field" placeholder="New password" required>
+                        <input type="password" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="newpwd" class="input-field" placeholder="New password" required>
+                        <input type="password" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="newpwd2" class="input-field" placeholder="New password" required>
                         <button type="submit" name="passwdsubmit" class="submit-btn" style="top:130px">Update password</button>
                     </form>
                 </div>
