@@ -57,7 +57,7 @@
         $query = "INSERT INTO Aktywnosc VALUES ($id_uzytkownika, $id_aktywnosci, $ilosc, TO_DATE('$czas_rozpoczecia', 'YYYY-MM-DD'), $czas, $kcal)";
         $pars = oci_parse($conn, $query);
         $err = oci_execute($pars);
-        if ($err) {
+        if (!$err) {
             echo '<html>
                 <head>
                     <link rel="shortcut icon" href="../../style/img/logo_icon.png">
