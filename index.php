@@ -32,7 +32,7 @@
         <!-- Navbar -->
         <div id="navbar">
             <nav>
-                <a href="../home">
+                <a href="./">
                     <div class="logo">
                         <img src="./frontend/style/img/logo_icon.png" id="logo-icon-normal">
                         <img src="./frontend/style/img/logo_icon_hover.png" id="logo-icon-hover">
