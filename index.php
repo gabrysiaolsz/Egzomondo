@@ -41,6 +41,7 @@
                     <li><a href="./frontend/templates/about">About us</a></li>
                     <li><a href="./frontend/templates/new_challenge">New Challenge</a></li>
                     <li><a href="./frontend/templates/activity">New Activity</a></li>
+                    <li><a href="./frontend/templates/_common/logout.php">Log out</a></li>
                 </ol>
                 <div class="search_box">
                     <form action="./frontend/templates/search/index.php" method="POST" class="search_box" >
