@@ -92,17 +92,17 @@
                     }
                 ?>
                 <form action="index.php" method="POST" id="login" class="input-group">
-                    <input type="text" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" class="input-field" placeholder="User id" required>
-                    <input type="password" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="passwd" class="input-field" placeholder="Enter password" required>
+                    <input type="text" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="login" class="input-field" placeholder="User id" required>
+                    <input type="password" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="passwd" class="input-field" placeholder="Enter password" required>
                     <input type="checkbox" name="rememberpwd" class="check-box"><span class="span-log">Remember Password</span>
                     <button type="submit" name="submit-log" class="submit-btn">Log in</button>
                     <a href="forgot_passwd.php" class="forgot-password"><span class="span-forgotpwd">Forgot password?</span></a>
                 </form>
                 
                 <form action="index.php" method="POST" id="register" class="input-group">
-                    <input type="text" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" class="input-field" placeholder="User id" required>
-                    <input type="password" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="passwd" class="input-field" placeholder="Enter password" required> 
-                    <input type="password" minlengh="4" maxlenght="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="chkpassword" class="input-field" placeholder="Confirm password" required>
+                    <input type="text" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="login" class="input-field" placeholder="User id" required>
+                    <input type="password" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="passwd" class="input-field" placeholder="Enter password" required> 
+                    <input type="password" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" name="chkpassword" class="input-field" placeholder="Confirm password" required>
                     <input type="checkbox" class="check-box" required><span class="span-reg">I agree to the terms and conditions</span>
                     <button type="submit" name="submit-reg" class="submit-btn">Register</button>
                 </form>
