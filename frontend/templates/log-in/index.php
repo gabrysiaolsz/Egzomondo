@@ -58,6 +58,11 @@
             }
             oci_commit($conn);
 
+            $stid = oci_parse($conn, "SELECT id FROM Konto WHERE login ='$_POST[login]'");
+            oci_execute($stid);
+            $row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS);
+            $_SESSION['id'] = $row[0];
+
             $_SESSION['login'] = $_POST['login'];
             header('location:'.$location);
             oci_free_statement($insert);
