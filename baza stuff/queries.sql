@@ -97,3 +97,34 @@ MINUS
     SELECT ZAPROSZONY from ZAPROSZENIA_DO_ZNAJOMYCH WHERE ZAPRASZAJACY = $id
 );
 
+UPDATE AKTYWNOSC
+    SET kcal = (SELECT waga
+                 FROM KONTO
+                 WHERE KONTO.id = AKTYWNOSC.ID)
+    WHERE ID_RODZAJU=1;
+UPDATE AKTYWNOSC
+    SET kcal = CZAS_TRWANIA * 6 * 3.5 * kcal /200
+    WHERE ID_RODZAJU=1;
+
+commit;
+
+UPDATE AKTYWNOSC
+    SET kcal = (SELECT waga
+                 FROM KONTO
+                 WHERE KONTO.id = AKTYWNOSC.ID)
+    WHERE ID_RODZAJU=2;
+UPDATE AKTYWNOSC
+    SET kcal = CZAS_TRWANIA * 3.8 * 3.5 * kcal /200
+    WHERE ID_RODZAJU=2;
+commit;
+
+UPDATE AKTYWNOSC
+    SET kcal = (SELECT waga
+                 FROM KONTO
+                 WHERE KONTO.id = AKTYWNOSC.ID)
+    WHERE ID_RODZAJU=3;
+UPDATE AKTYWNOSC
+    SET kcal = CZAS_TRWANIA * 8 * 3.5 * kcal /200
+    WHERE ID_RODZAJU=3;
+commit;
+
