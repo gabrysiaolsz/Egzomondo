@@ -3,8 +3,10 @@
         <a href="../about">
             <div class="logo">
                 <img src="../../style/img/logo_icon.png" id="logo-icon-normal">
-                <div id="logo-text"><a href="../about">Egzomondo - About</a></div>
+                <img src="../../style/img/logo_icon_hover.png" id="logo-icon-hover">
+                Egzomondo - About
             </div>
+            
         </a>
     </nav>
 </div>
