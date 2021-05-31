@@ -57,20 +57,28 @@
                 echo "No such activity as $id_aktywnosci</br>";
             }
             oci_free_statement($pars);
+
+            $query = "SELECT id FROM WYZWANIE WHERE nazwa='$nazwa' AND tworca=$id_uzytkownika";
+            $pars = oci_parse($conn, $query);
+            $err &= oci_execute($pars);
+            if(($row = oci_fetch_array($pars, OCI_BOTH + OCI_RETURN_NULLS)) != false){
+                echo "You already have a challenge named '$nazwa'";
+                $error = true;
+            }
+            oci_free_statement($pars);
+
             if (!$error) {
                 $query = "INSERT INTO WYZWANIE VALUES (null, '$nazwa', $id_uzytkownika, TO_DATE('$czas_rozpoczecia', 'YYYY-MM-DD'), TO_DATE('$czas_ukonczenia', 'YYYY-MM-DD'), 0, $cel, '$jednostka_celu', 0, $id_aktywnosci)";
                 $pars = oci_parse($conn, $query);
                 $err = oci_execute($pars);
                 if (!$err) {
-                    
-                    
                     echo 'Creating new challenge was unsuccessful';
                     return;
                 }
                 oci_commit($conn);
                 oci_free_statement($pars);
 
-                $query = "SELECT id FROM WYZWANIE WHERE nazwa='$nazwa' AND tworca=$id_uzytkownika AND czas_rozpoczecia = TO_DATE('$czas_rozpoczecia', 'YYYY-MM-DD') AND czas_ukonczenia=TO_DATE('$czas_ukonczenia', 'YYYY-MM-DD') AND id_aktywnosci=$id_aktywnosci AND jednostka_celu='$jednostka_celu' AND cel=$cel";
+                $query = "SELECT id FROM WYZWANIE WHERE nazwa='$nazwa' AND tworca=$id_uzytkownika ";
                 $pars = oci_parse($conn, $query);
                 $err &= oci_execute($pars);
                 $row = oci_fetch_array($pars, OCI_BOTH + OCI_RETURN_NULLS);
