@@ -176,17 +176,21 @@ a:hover > #author-name-field {
     /* Position in the grid */
     grid-column: 1 / 4;
     grid-row: 3;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.users-side {
+    height: 100%;
+    overflow: auto;
 }
 
 #users-flexbox {
-    /* Height */
-    height: 100%;
-
     /* Flexbox */
     display: flex;
     flex-direction: column;
-
-    overflow: auto;
+    width: 100%;
 }
 
 .users-box-elem {
