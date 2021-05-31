@@ -95,7 +95,7 @@
                                     $id_uzytkownika = $row[1];
                                     if($id_uzytkownika == $_SESSION['id']) $participating = true;
                                     $stid2 = oci_parse($conn, "
-                                        SELECT SUM(A.ILOSC) odleglosc, SUM(A.CZAS_TRWANIA) czas
+                                        SELECT SUM(A.ILOSC) odleglosc, SUM(A.CZAS_TRWANIA) czas, SUM(A.kcal)
                                         FROM AKTYWNOSC A, WYZWANIE W
                                         WHERE A.ID = $id_uzytkownika AND W.id = $id 
                                         AND A.DATA_ROZPOCZECIA <= W.CZAS_UKONCZENIA AND A.DATA_ROZPOCZECIA>= W.CZAS_ROZPOCZECIA
@@ -105,8 +105,10 @@
                                     $exists = ($row2 = oci_fetch_array($stid2, OCI_BOTH  + OCI_RETURN_NULLS));
                                     if ($challenge_unit == 'km' && $exists) 
                                         $progress = $row2[0] / $challenge_goal * 100;
-                                    else if ($exists) 
+                                    else if ($challenge_unit == 'min' && $exists) 
                                         $progress = $row2[1] / $challenge_goal * 100;
+                                    else if ($challenge_unit == 'kcal' && $exists) 
+                                        $progress = $row2[2] / $challenge_goal * 100;
                                     else 
                                         $progress = 0;
                                     

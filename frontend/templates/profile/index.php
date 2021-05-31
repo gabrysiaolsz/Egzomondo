@@ -174,9 +174,10 @@
                             oci_execute($stid);
 
                             while ($row = oci_fetch_array($stid, OCI_BOTH  + OCI_RETURN_NULLS)) {
+                                
                                 [$challenge_id, $challenge_name, $start_time, $end_time, $goal, $unit, $act_type] = $row;
                                 $query = "
-                                    SELECT sum(ilosc), sum(czas_trwania) FROM Aktywnosc
+                                    SELECT sum(ilosc), sum(czas_trwania), sum(kcal) FROM Aktywnosc
                                     WHERE id = $id AND id_rodzaju = $act_type AND '$start_time' <= data_rozpoczecia AND data_rozpoczecia <= '$end_time'
                                     GROUP BY id
                                 ";
@@ -187,15 +188,18 @@
                                 if($row_loop != false){
                                     $distance = $row_loop[0];
                                     $time     = $row_loop[1];
+                                    $kcal     = $row_loop[2];
                                 } else {
                                     $distance = 0;
                                     $time = 0;
+                                    $kcal=0;
                                 }
-                                
                                 if ($unit == "km") {
                                     $progress = $distance / $goal * 100;
-                                } else {
+                                } else if($unit=='min'){
                                     $progress = $time / $goal * 100;
+                                }else{
+                                    $progress = $kcal / $goal * 100;
                                 }
                                 if ($progress > 100) $progress = 100;
 
