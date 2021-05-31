@@ -10,7 +10,7 @@
     $czas_rozpoczecia = date('Y-m-d');
     $czas_rozpoczecia = date("Y-m-d", strtotime(str_replace('-', '/', $czas_rozpoczecia)));
 
-    if (!isset($_POST['duration']) || !isset($_POST['distance']) || !isset($_POST['activity']) {
+    if (!isset($_POST['duration']) || !isset($_POST['distance']) || !isset($_POST['activity'])) {
         $error = true;
         echo "Invalid request!\n";
     }
