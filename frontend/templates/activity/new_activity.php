@@ -47,7 +47,7 @@
         $waga = $row[0];
     } else if (!$error) {
         $error = true;
-        echo "No such activity as $id_aktywnosci\n";
+        echo "No such user as $id_aktywnosci\n";
     }
     oci_free_statement($pars);
 
