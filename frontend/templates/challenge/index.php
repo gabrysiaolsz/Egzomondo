@@ -47,7 +47,7 @@
                 </div>
                 <!-- Author -->
                 <div id="author-name">
-                    <a href="#">
+                    <a href="../profile?id=<?php echo $challenge_author_id; ?>">
                         <div id="author-name-field">
                             by <?php echo $challenge_author; ?>
                         </div>
