@@ -168,7 +168,7 @@
                             </tr>
                             <tr>
                                 <td>Username: </td>
-                                <td><input type="text" minlengh="4" maxlenght="20" pattern="[A-Za-z0-9@#$%]+" id="user" name="username" class="input-field" placeholder="User" value="<?php echo $username; ?>" /></td>
+                                <td><input type="text" minlength="4" maxlength="20" pattern="[A-Za-z0-9@#$%]+" id="user" name="username" class="input-field" placeholder="User" value="<?php echo $username; ?>" /></td>
                             </tr>
                             <tr>
                                 <td>Weight: </td>
