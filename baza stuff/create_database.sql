@@ -86,4 +86,7 @@ CREATE TABLE Aktywnosc
     czas_trwania number not null
 );
 
+ALTER TABLE AKTYWNOSC
+ADD kcal number DEFAULT  0;
+
 commit ;
