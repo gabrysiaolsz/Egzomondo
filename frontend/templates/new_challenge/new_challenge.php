@@ -63,7 +63,7 @@
             </head>
             <body>';
             include '../_common/navbar.php';
-            echo 'Joining was unsuccessful</body></html>';
+            echo 'Creating new challenge was unsuccessful</body></html>';
             return;
         }
         oci_commit($conn);
@@ -86,7 +86,7 @@
             </head>
             <body>';
             include '../_common/navbar.php';
-            echo 'Joining was unsuccessful</body></html>';
+            echo 'Creating new challenge was unsuccessful</body></html>';
             return;
         }
         oci_commit($conn);
@@ -107,7 +107,7 @@
             </head>
             <body>';
             include '../_common/navbar.php';
-            echo 'Joining was unsuccessful</body></html>';
+            echo 'Joining new challenge was unsuccessful</body></html>';
             return;
         }
         oci_commit($conn);
